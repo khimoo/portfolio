@@ -37,7 +37,7 @@
         }
       ],
       "inbound_count": 2,
-      "processed_at": "2025-12-27T15:38:34.777010559+00:00"
+      "processed_at": "2025-12-27T15:46:38.650431653+00:00"
     },
     {
       "slug": "web-development",
@@ -70,7 +70,7 @@
         }
       ],
       "inbound_count": 1,
-      "processed_at": "2025-12-27T15:38:34.777596546+00:00"
+      "processed_at": "2025-12-27T15:46:38.650960158+00:00"
     },
     {
       "slug": "test",
@@ -90,7 +90,7 @@
       "file_path": "articles/test.md",
       "outbound_links": [],
       "inbound_count": 0,
-      "processed_at": "2025-12-27T15:38:34.777658490+00:00"
+      "processed_at": "2025-12-27T15:46:38.651032162+00:00"
     },
     {
       "slug": "readme",
@@ -110,7 +110,7 @@
       "file_path": "articles/README.md",
       "outbound_links": [],
       "inbound_count": 0,
-      "processed_at": "2025-12-27T15:38:34.777764246+00:00"
+      "processed_at": "2025-12-27T15:46:38.651144922+00:00"
     },
     {
       "slug": "rust-async",
@@ -159,7 +159,7 @@
         }
       ],
       "inbound_count": 4,
-      "processed_at": "2025-12-27T15:38:34.778911644+00:00"
+      "processed_at": "2025-12-27T15:46:38.652391496+00:00"
     },
     {
       "slug": "about-khimoo",
@@ -191,7 +191,7 @@
         }
       ],
       "inbound_count": 0,
-      "processed_at": "2025-12-27T15:38:34.779479386+00:00"
+      "processed_at": "2025-12-27T15:46:38.653015709+00:00"
     },
     {
       "slug": "broken-link-test",
@@ -232,7 +232,7 @@
         }
       ],
       "inbound_count": 0,
-      "processed_at": "2025-12-27T15:38:34.780102461+00:00"
+      "processed_at": "2025-12-27T15:46:38.653732896+00:00"
     },
     {
       "slug": "async-patterns",
@@ -271,7 +271,7 @@
         }
       ],
       "inbound_count": 2,
-      "processed_at": "2025-12-27T15:38:34.780901753+00:00"
+      "processed_at": "2025-12-27T15:46:38.654637582+00:00"
     },
     {
       "slug": "hello",
@@ -313,10 +313,10 @@
         }
       ],
       "inbound_count": 2,
-      "processed_at": "2025-12-27T15:38:34.781545206+00:00"
+      "processed_at": "2025-12-27T15:46:38.655369225+00:00"
     }
   ],
-  "generated_at": "2025-12-27T15:38:34.781689173+00:00",
+  "generated_at": "2025-12-27T15:46:38.655537509+00:00",
   "total_count": 9,
   "home_articles": [
     "tokio-basics",
