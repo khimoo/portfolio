@@ -22,7 +22,7 @@ fn root() -> Html {
     let basename = if cfg!(debug_assertions) {
         "/".to_string()
     } else {
-        "/khimoo.io/".to_string() // github pagesのURL
+        "/portfolio-page/".to_string() // github pagesのURL
     };
 
     html! {

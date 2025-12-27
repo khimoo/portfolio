@@ -153,7 +153,7 @@ jobs:
           ls -la articles/img/ || echo "❌ No articles/img directory found"
           
           # Build with Trunk
-          nix develop --command trunk build --release --public-url /khimoo.io/
+          nix develop --command trunk build --release --public-url /portfolio-page/
           
           # Debug: Check dist directory after build
           echo "🔍 Checking dist directory after build:"
@@ -258,7 +258,7 @@ jobs:
       - name: Verify deployment
         run: |
           echo "✅ GitHub Pages deployment completed"
-          echo "🌐 Site will be available at: https://${{ github.repository_owner }}.github.io/khimoo.io/"
+          echo "🌐 Site will be available at: https://${{ github.repository_owner }}.github.io/portfolio-page/"
           echo "📝 Deployment commit: ${{ github.sha }}"
           echo "📁 Deployed files:"
           ls -la ./public/
@@ -270,5 +270,5 @@ jobs:
           echo "  - data/articles.json: $([ -f ./public/data/articles.json ] && echo '✅' || echo '❌')"
           echo "  - data/link-graph.json: $([ -f ./public/data/link-graph.json ] && echo '✅' || echo '❌')"
           echo "📈 Expected data loading URLs:"
-          echo "  - Articles: https://${{ github.repository_owner }}.github.io/khimoo.io/data/articles.json"
-          echo "  - Link Graph: https://${{ github.repository_owner }}.github.io/khimoo.io/data/link-graph.json"
+          echo "  - Articles: https://${{ github.repository_owner }}.github.io/portfolio-page/data/articles.json"
+          echo "  - Link Graph: https://${{ github.repository_owner }}.github.io/portfolio-page/data/link-graph.json"

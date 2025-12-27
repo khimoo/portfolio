@@ -28,7 +28,7 @@ fn determine_node_content(article: &ProcessedArticle) -> NodeContent {
         let optimized_image_url = if image_url.starts_with("/articles/") {
             // 元の画像パスから最適化された中サイズ画像パスを生成
             let optimized_path = image_url.replace("/articles/img/author_img.png", "/articles/img/author_img_medium.png");
-            format!("/khimoo.io{}", optimized_path)
+            format!("/portfolio-page{}", optimized_path)
         } else {
             image_url.clone()
         };

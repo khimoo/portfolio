@@ -37,7 +37,7 @@ jobs:
 
       - name: Build WebAssembly application
         run: |
-          nix develop --command trunk build --release --public-url /khimoo.io/
+          nix develop --command trunk build --release --public-url /portfolio-page/
         working-directory: ./khimoo-portfolio
 
       - name: Prepare deployment directory

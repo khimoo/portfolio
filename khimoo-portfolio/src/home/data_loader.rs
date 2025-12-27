@@ -190,10 +190,10 @@ impl DataLoader {
             if let Some(location) = window.location().pathname().ok() {
                 web_sys::console::log_1(&format!("DataLoader: Current pathname: {}", location).into());
                 
-                // If we're in a subdirectory (like /khimoo.io/), use that as the base
-                if location.starts_with("/khimoo.io/") || location.contains("/khimoo.io") {
-                    web_sys::console::log_1(&"DataLoader: Detected GitHub Pages subdirectory, using /khimoo.io/data".into());
-                    return "/khimoo.io/data".to_string();
+                // If we're in a subdirectory (like /portfolio-page/), use that as the base
+                if location.starts_with("/portfolio-page/") || location.contains("/portfolio-page") {
+                    web_sys::console::log_1(&"DataLoader: Detected GitHub Pages subdirectory, using /portfolio-page/data".into());
+                    return "/portfolio-page/data".to_string();
                 }
             }
             
@@ -201,8 +201,8 @@ impl DataLoader {
             if let Some(hostname) = window.location().hostname().ok() {
                 web_sys::console::log_1(&format!("DataLoader: Current hostname: {}", hostname).into());
                 if hostname.contains("github.io") {
-                    web_sys::console::log_1(&"DataLoader: Detected GitHub Pages, using /khimoo.io/data".into());
-                    return "/khimoo.io/data".to_string();
+                    web_sys::console::log_1(&"DataLoader: Detected GitHub Pages, using /portfolio-page/data".into());
+                    return "/portfolio-page/data".to_string();
                 }
             }
         }
