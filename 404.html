@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<style type="text/css">
+body {
+   margin: 0;
+   padding: 0;
+}
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Khimoo Portfolio</title>
+    
+<script type="module">
+import init, * as bindings from '/khimoo.io/khimoo-portfolio-d7e8718a0b7d25a0.js';
+const wasm = await init({ module_or_path: '/khimoo.io/khimoo-portfolio-d7e8718a0b7d25a0_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+    
+<link rel="modulepreload" href="/khimoo.io/khimoo-portfolio-d7e8718a0b7d25a0.js" crossorigin="anonymous" integrity="sha384-/nf1V+IiKQZBflDos7fjemWy1e2P8beVFjcArZhT25pvmedKoTh81OUygQMDJuJ+"><link rel="preload" href="/khimoo.io/khimoo-portfolio-d7e8718a0b7d25a0_bg.wasm" crossorigin="anonymous" integrity="sha384-HIp6IqjmpnYVIqcEbYY0/QbKM3CoAG2sG3MhyA2sY92ncErxkKBUO+SkQSsNLsGE" as="fetch" type="application/wasm"></head>
+
+<body>
+</body>
+
+</html>
