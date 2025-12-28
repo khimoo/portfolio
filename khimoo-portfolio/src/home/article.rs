@@ -4,6 +4,53 @@ use yew::virtual_dom::AttrValue;
 use super::data_loader::{use_article_content, use_lightweight_articles};
 use yew_router::prelude::*;
 use super::routes::Route;
+use regex::Regex;
+use web_sys::HtmlAnchorElement;
+use wasm_bindgen::JsCast;
+
+
+/// Convert wiki-style links [[article-name]] to special markers for later processing
+/// 記事内の [[Title]] を一時的なマーカー文字列に変換します
+fn process_wiki_links(content: &str) -> String {
+    let wiki_regex = Regex::new(r"\[\[([^\]]+)\]\]").unwrap();
+
+    wiki_regex.replace_all(content, |caps: &regex::Captures| {
+        let article_title = &caps[1];
+        let slug = generate_slug_from_title(article_title);
+        // マークダウンパーサーに干渉されない一意な文字列にしておく
+        format!("{{{{WIKI_LINK:{}:{}}}}}", slug, article_title)
+    }).to_string()
+}
+
+/// Convert wiki link markers in HTML to actual HTML links
+/// HTML変換後の文字列からマーカーを探し、実際の <a> タグに変換します
+fn convert_wiki_markers_to_html(html_content: &str) -> String {
+    let marker_regex = Regex::new(r"\{\{WIKI_LINK:([^:]+):([^}]+)\}\}").unwrap();
+
+    marker_regex.replace_all(html_content, |caps: &regex::Captures| {
+        let slug = &caps[1];
+        let title = &caps[2];
+        // クラス名 wiki-link を付与してCSSで装飾可能にする
+        format!(r#"<a href="/article/{}" class="wiki-link">{}</a>"#, slug, title)
+    }).to_string()
+}
+
+/// Generate a slug from article title (same logic as in article_processing.rs)
+fn generate_slug_from_title(title: &str) -> String {
+    let slug = title
+        .to_lowercase()
+        .trim()
+        .replace(' ', "-")
+        .chars()
+        .filter(|c| c.is_alphanumeric() || *c == '-' || *c == '_')
+        .collect::<String>()
+        .trim_matches('-')
+        .to_string();
+
+    // Replace multiple consecutive dashes with single dash
+    let re = Regex::new(r"-+").unwrap();
+    re.replace_all(&slug, "-").to_string()
+}
 
 #[function_component(ArticleIndex)]
 pub fn article_index() -> Html {
@@ -127,8 +174,6 @@ pub fn article_index() -> Html {
     }
 }
 
-
-
 #[derive(Properties, PartialEq)]
 pub struct ArticleViewProps {
     pub slug: String,
@@ -138,6 +183,38 @@ pub struct ArticleViewProps {
 pub fn article_view(props: &ArticleViewProps) -> Html {
     let (article, loading, error) = use_article_content(Some(props.slug.clone()));
 
+    // ナビゲーターを取得（これでRustコードから画面遷移できます）
+    let navigator = use_navigator().unwrap();
+
+    // クリックイベントハンドラーの定義
+    // 記事本文内のクリックを監視し、.wiki-link がクリックされた時だけSPA遷移を割り込ませます
+    let on_article_click = {
+        let navigator = navigator.clone();
+        Callback::from(move |e: MouseEvent| {
+            // クリックされた要素を取得
+            let target = e.target_unchecked_into::<web_sys::Element>();
+
+            // クリックされた要素、またはその親要素が ".wiki-link" クラスを持っているか確認
+            // (closestを使うことで、リンク内の文字などをクリックしても反応するようにします)
+            if let Ok(Some(element)) = target.closest(".wiki-link") {
+                // デフォルトのリンク動作（画面リロード）をキャンセル
+                e.prevent_default();
+
+                // href属性やpathnameから遷移先情報を取得するためにアンカー要素として扱う
+                let anchor = element.unchecked_into::<HtmlAnchorElement>();
+                let pathname = anchor.pathname(); // 例: "/article/my-slug"
+
+                // パスからslug部分を抽出 (/article/以降)
+                // ※URLの構造に依存します。ここでは単純に最後のセグメントを取得
+                if let Some(slug) = pathname.split('/').last() {
+                    if !slug.is_empty() {
+                         // ここで <Link> と同じ動き（ルーター遷移）を実行
+                        navigator.push(&Route::ArticleShow { slug: slug.to_string() });
+                    }
+                }
+            }
+        })
+    };
     if *loading {
         return html! {
             <>
@@ -184,12 +261,16 @@ pub fn article_view(props: &ArticleViewProps) -> Html {
         };
     }
 
-    if let Some(article_data) = article.as_ref() {
-        // Convert markdown to HTML
-        let parser = Parser::new(&article_data.content);
+if let Some(article_data) = article.as_ref() {
+        let processed_content = process_wiki_links(&article_data.content);
+        let parser = Parser::new(&processed_content);
         let mut html_output = String::new();
         html::push_html(&mut html_output, parser);
-        let rendered = Html::from_html_unchecked(AttrValue::from(html_output));
+
+        // <a>タグには .wiki-link クラスが付与されていることを前提とします
+        // convert_wiki_markers_to_html関数で class="wiki-link" をつけているのでOKです
+        let final_html = convert_wiki_markers_to_html(&html_output);
+        let rendered = Html::from_html_unchecked(AttrValue::from(final_html));
 
         html! {
             <>
@@ -205,8 +286,24 @@ pub fn article_view(props: &ArticleViewProps) -> Html {
                      .markdown-body blockquote { border-left: 4px solid #66b3ff; padding-left: 16px; color: #aaa; margin: 0 0 16px 0; }
                      .markdown-body a { color: #66b3ff; text-decoration: none; }
                      .markdown-body a:hover { color: #99ccff; text-decoration: underline; }
-                     a { color: #66b3ff; text-decoration: none; }
-                     a:hover { color: #99ccff; text-decoration: underline; }"}
+
+                     /* Wiki Link用のスタイル */
+                     .wiki-link {
+                         color: #66b3ff;
+                         text-decoration: none;
+                         background: rgba(102, 179, 255, 0.1);
+                         padding: 2px 4px;
+                         border-radius: 3px;
+                         border: 1px solid rgba(102, 179, 255, 0.3);
+                         transition: all 0.2s ease;
+                     }
+                     .wiki-link:hover {
+                         color: #99ccff;
+                         background: rgba(102, 179, 255, 0.3);
+                         border-color: rgba(102, 179, 255, 0.6);
+                         text-decoration: none;
+                     }
+                     "}
                 </style>
                 <div style="padding: 16px; max-width: 800px; margin: 0 auto; background: #081D35; min-height: 100vh;">
                     <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
@@ -265,7 +362,8 @@ pub fn article_view(props: &ArticleViewProps) -> Html {
                             </div>
                         </header>
 
-                        <div class="markdown-body">
+                        // ここでリンク化されたHTMLがレンダリングされます
+                        <div class="markdown-body" onclick={on_article_click}>
                             { rendered }
                         </div>
 
