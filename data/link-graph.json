@@ -1,119 +1,130 @@
 {
   "graph": {
-    "test": {
+    "プログラミング": {
       "connections": [],
-      "inbound_count": 0,
+      "inbound_count": 1,
       "outbound_count": 0
     },
-    "broken-link-test": {
+    "neovim": {
       "connections": [],
-      "inbound_count": 0,
-      "outbound_count": 2
-    },
-    "readme": {
-      "connections": [],
-      "inbound_count": 0,
+      "inbound_count": 1,
       "outbound_count": 0
     },
-    "web-development": {
+    "linux": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
+    },
+    "趣味": {
       "connections": [
         {
-          "target": "hello",
-          "connection_type": "Bidirectional",
-          "bidirectional": true,
+          "target": "音楽",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "絵",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "linux",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "neovim",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "プログラミング",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "家庭菜園",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
           "link_count": 1
         }
       ],
       "inbound_count": 1,
-      "outbound_count": 1
+      "outbound_count": 6
     },
-    "tokio-basics": {
-      "connections": [
-        {
-          "target": "rust-async",
-          "connection_type": "Bidirectional",
-          "bidirectional": true,
-          "link_count": 2
-        }
-      ],
-      "inbound_count": 2,
-      "outbound_count": 2
+    "絵": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
     },
-    "rust-async": {
-      "connections": [
-        {
-          "target": "async-patterns",
-          "connection_type": "Bidirectional",
-          "bidirectional": true,
-          "link_count": 1
-        },
-        {
-          "target": "hello",
-          "connection_type": "Bidirectional",
-          "bidirectional": true,
-          "link_count": 1
-        },
-        {
-          "target": "tokio-basics",
-          "connection_type": "Bidirectional",
-          "bidirectional": true,
-          "link_count": 1
-        }
-      ],
-      "inbound_count": 4,
-      "outbound_count": 3
+    "数学": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
     },
-    "hello": {
-      "connections": [
-        {
-          "target": "rust-async",
-          "connection_type": "Bidirectional",
-          "bidirectional": true,
-          "link_count": 1
-        },
-        {
-          "target": "web-development",
-          "connection_type": "Bidirectional",
-          "bidirectional": true,
-          "link_count": 1
-        }
-      ],
-      "inbound_count": 2,
-      "outbound_count": 2
+    "ガクチカ": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
     },
     "about-khimoo": {
       "connections": [
         {
-          "target": "async-patterns",
+          "target": "個人開発",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "趣味",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "ガクチカ",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "数学",
           "connection_type": "DirectLink",
           "bidirectional": false,
           "link_count": 1
         }
       ],
       "inbound_count": 0,
-      "outbound_count": 1
+      "outbound_count": 4
     },
-    "async-patterns": {
-      "connections": [
-        {
-          "target": "rust-async",
-          "connection_type": "Bidirectional",
-          "bidirectional": true,
-          "link_count": 1
-        },
-        {
-          "target": "tokio-basics",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        }
-      ],
-      "inbound_count": 2,
-      "outbound_count": 2
+    "個人開発": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
+    },
+    "音楽": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
+    },
+    "家庭菜園": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
+    },
+    "template_article": {
+      "connections": [],
+      "inbound_count": 0,
+      "outbound_count": 0
     }
   },
-  "generated_at": "2025-12-27T15:46:44.794483546+00:00",
+  "generated_at": "2025-12-28T15:32:01.598267911+00:00",
   "total_connections": 10,
-  "bidirectional_pairs": 4,
-  "direct_links": 2
+  "bidirectional_pairs": 0,
+  "direct_links": 10
 }
