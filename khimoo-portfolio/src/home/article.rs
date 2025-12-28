@@ -9,28 +9,24 @@ use web_sys::HtmlAnchorElement;
 use wasm_bindgen::JsCast;
 
 
-/// Convert wiki-style links [[article-name]] to special markers for later processing
-/// 記事内の [[Title]] を一時的なマーカー文字列に変換します
 fn process_wiki_links(content: &str) -> String {
     let wiki_regex = Regex::new(r"\[\[([^\]]+)\]\]").unwrap();
 
     wiki_regex.replace_all(content, |caps: &regex::Captures| {
-        let article_title = &caps[1];
-        let slug = generate_slug_from_title(article_title);
-        // マークダウンパーサーに干渉されない一意な文字列にしておく
-        format!("{{{{WIKI_LINK:{}:{}}}}}", slug, article_title)
+        let title = &caps[1];
+        let slug = generate_slug_from_title(title);
+        // HTML化した後に置換しやすいよう、独自タグのような形式にする
+        format!("WIKILINKSTART:{}:{}WIKILINKEND", slug, title)
     }).to_string()
 }
 
-/// Convert wiki link markers in HTML to actual HTML links
-/// HTML変換後の文字列からマーカーを探し、実際の <a> タグに変換します
 fn convert_wiki_markers_to_html(html_content: &str) -> String {
-    let marker_regex = Regex::new(r"\{\{WIKI_LINK:([^:]+):([^}]+)\}\}").unwrap();
+    // 独自タグ形式を検索して <a> タグに置換
+    let marker_regex = Regex::new(r"WIKILINKSTART:([^:]+):([^W]+)WIKILINKEND").unwrap();
 
     marker_regex.replace_all(html_content, |caps: &regex::Captures| {
         let slug = &caps[1];
         let title = &caps[2];
-        // クラス名 wiki-link を付与してCSSで装飾可能にする
         format!(r#"<a href="/article/{}" class="wiki-link">{}</a>"#, slug, title)
     }).to_string()
 }
@@ -262,15 +258,25 @@ pub fn article_view(props: &ArticleViewProps) -> Html {
     }
 
 if let Some(article_data) = article.as_ref() {
-        let processed_content = process_wiki_links(&article_data.content);
-        let parser = Parser::new(&processed_content);
-        let mut html_output = String::new();
-        html::push_html(&mut html_output, parser);
+    // 1. 本文をそのまま取得
+    let raw_content = &article_data.content;
 
-        // <a>タグには .wiki-link クラスが付与されていることを前提とします
-        // convert_wiki_markers_to_html関数で class="wiki-link" をつけているのでOKです
-        let final_html = convert_wiki_markers_to_html(&html_output);
-        let rendered = Html::from_html_unchecked(AttrValue::from(final_html));
+    // 2. Wikiリンク記法をマーカーに変換
+    // ここで変換されないと、Markdownパーサーが [[ ]] をリンクとして認識しません
+    let processed_content = process_wiki_links(raw_content);
+
+    // 3. Markdown を HTML に変換
+    let parser = Parser::new(&processed_content);
+    let mut html_output = String::new();
+    html::push_html(&mut html_output, parser);
+
+    // 4. 【重要】生成されたHTML文字列に対して、マーカーを <a> タグに置換
+    // Markdownパーサーが特殊文字をエスケープしている可能性があるため、
+    // 最終的なHTML文字列に対して実行するのが最も確実です。
+    let final_html = convert_wiki_markers_to_html(&html_output);
+
+    // 5. HTMLとしてレンダリング
+    let rendered = Html::from_html_unchecked(AttrValue::from(final_html));
 
         html! {
             <>
