@@ -10,19 +10,29 @@ use wasm_bindgen::JsCast;
 
 
 fn process_wiki_links(content: &str) -> String {
+    // [[...]] の中身を取り出す
     let wiki_regex = Regex::new(r"\[\[([^\]]+)\]\]").unwrap();
 
     wiki_regex.replace_all(content, |caps: &regex::Captures| {
-        let title = &caps[1];
-        let slug = generate_slug_from_title(title);
-        // HTML化した後に置換しやすいよう、独自タグのような形式にする
-        format!("WIKILINKSTART:{}:{}WIKILINKEND", slug, title)
+        let inner = caps.get(1).unwrap().as_str();
+        // '|' があれば左側をリンクターゲット、右側を表示テキストとして扱う
+        let parts: Vec<&str> = inner.splitn(2, '|').collect();
+        let (link_target, display) = if parts.len() == 2 {
+            (parts[0].trim(), parts[1].trim())
+        } else {
+            (inner.trim(), inner.trim())
+        };
+
+        let slug = generate_slug_from_title(link_target);
+        // マーカーは -- slug と display を :: で区切る形式にする
+        format!("WIKILINKSTART:{}::{}::WIKILINKEND", slug, display)
     }).to_string()
 }
 
 fn convert_wiki_markers_to_html(html_content: &str) -> String {
-    // 独自タグ形式を検索して <a> タグに置換
-    let marker_regex = Regex::new(r"WIKILINKSTART:([^:]+):([^W]+)WIKILINKEND").unwrap();
+    // process_wiki_links で作ったマーカーを <a> に置換
+    // 非貪欲マッチ (.*?) を使い display 部分を正しく取得する
+    let marker_regex = Regex::new(r"WIKILINKSTART:([^:]+)::(.*?)::WIKILINKEND").unwrap();
 
     marker_regex.replace_all(html_content, |caps: &regex::Captures| {
         let slug = &caps[1];
