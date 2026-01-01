@@ -18,7 +18,7 @@
       "file_path": "articles/Neovim.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.219547557+00:00"
+      "processed_at": "2026-01-01T14:30:26.608297409+00:00"
     },
     {
       "slug": "myworks",
@@ -37,8 +37,8 @@
       },
       "file_path": "articles/myworks.md",
       "outbound_links": [],
-      "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.219743311+00:00"
+      "inbound_count": 2,
+      "processed_at": "2026-01-01T14:30:26.608510718+00:00"
     },
     {
       "slug": "linux",
@@ -58,7 +58,7 @@
       "file_path": "articles/Linux.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.219944636+00:00"
+      "processed_at": "2026-01-01T14:30:26.608702777+00:00"
     },
     {
       "slug": "gakuchika",
@@ -78,7 +78,7 @@
       "file_path": "articles/gakuchika.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.220160859+00:00"
+      "processed_at": "2026-01-01T14:30:26.608961171+00:00"
     },
     {
       "slug": "音楽",
@@ -98,65 +98,84 @@
       "file_path": "articles/音楽.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.220349530+00:00"
+      "processed_at": "2026-01-01T14:30:26.609158550+00:00"
     },
     {
       "slug": "about-khimoo",
-      "title": "Khimoo",
-      "content": "\n# About Khimoo\n\n[[math|数学]]\n[[hobby|趣味]]\n[[gakuchika|ガクチカ]]\n[[myworks|個人開発]]",
+      "title": "自己紹介",
+      "content": "# プロフィール\n日比野 文です。\n芸術、プログラミング、物理などに興味があり、全部の基礎を求めて数学科に進学しました!\n現在は[[continuum_theory|連続体理論]]について勉強しています!\n![[author_img.png]]\n# 経歴\n2001年 山形県天童市生まれ\n2017年 山形県立山形南高校 入学\n2020年 山形県立山形南高校 卒業\n2021年 筑波大学 理工学群 数学類 入学\n2025年 筑波大学 理工学群 数学類 卒業\n2025年 筑波大学 理工情報生命学術院 数理物質科学研究群 数学学位プログラム 入学\n# 専門\n[[math|数学]]\\\\[[continuum_theory|連続体理論]]\n位相空間論の分野で、いわゆる病的な空間というものを扱います。\n人間によって課題(ワルシャワサークル、メンガーのスポンジなど)を用意し、人間によってそれを調査します。\n理論の整備をするよりも問題を解くことの方が多いのは数学にしてはめずらしいのかなと思います。\n## 趣味\n絵、音楽などの芸術分野と、\n[[hobby|趣味]]\n[[gakuchika|ガクチカ]]\n[[myworks|個人開発]]",
       "metadata": {
-        "title": "Khimoo",
+        "title": "自己紹介",
         "home_display": true,
         "category": "author",
         "importance": 5,
         "related_articles": [],
         "tags": [
-          "about",
-          "profile",
-          "author"
+          "profile"
         ],
-        "created_at": "2024-01-01T09:00:00Z",
-        "updated_at": "2025-12-29T02:19:34Z",
+        "created_at": "2024-01-02T03:00:00Z",
+        "updated_at": "2026-01-01T23:24:57Z",
         "author_image": "/articles/img/author_img.png"
       },
       "file_path": "articles/about-khimoo.md",
       "outbound_links": [
         {
+          "target_slug": "continuum_theory",
+          "link_type": "WikiLink",
+          "context": "文です。 芸術、プログラミング、物理などに興味があり、全部の基礎を求めて数学科に進学しました! 現在は[[continuum_theory|連続体理論]]について勉強しています! ![[author_",
+          "position": 178,
+          "original_text": "[[continuum_theory|連続体理論]]"
+        },
+        {
+          "target_slug": "author_imgpng",
+          "link_type": "WikiLink",
+          "context": "芸術、プログラミング、物理などに興味があり、全部の基礎を求めて数学科に進学しました! 現在は[[continuum_theory|連続体理論]]について勉強しています! ![[author_img.p",
+          "position": 250,
+          "original_text": "[[author_img.png]]"
+        },
+        {
           "target_slug": "math",
           "link_type": "WikiLink",
-          "context": "# About Khimoo [[math|数学]] [[hobby|趣味]] [[gakuchika|ガクチカ]] [[myworks|個人開発]]",
-          "position": 17,
+          "context": "2025年 筑波大学 理工情報生命学術院 数理物質科学研究群 数学学位プログラム 入学 # 専門 [[math|数学]]\\\\[[continuum_theory|連続体理論]] 位相空間論の分野で、い",
+          "position": 623,
           "original_text": "[[math|数学]]"
+        },
+        {
+          "target_slug": "continuum_theory",
+          "link_type": "WikiLink",
+          "context": "理工情報生命学術院 数理物質科学研究群 数学学位プログラム 入学 # 専門 [[math|数学]]\\\\[[continuum_theory|連続体理論]] 位相空間論の分野で、いわゆる病的な空間という",
+          "position": 640,
+          "original_text": "[[continuum_theory|連続体理論]]"
         },
         {
           "target_slug": "hobby",
           "link_type": "WikiLink",
-          "context": "# About Khimoo [[math|数学]] [[hobby|趣味]] [[gakuchika|ガクチカ]] [[myworks|個人開発]]",
-          "position": 33,
+          "context": "理論の整備をするよりも問題を解くことの方が多いのは数学にしてはめずらしいのかなと思います。 ## 趣味 絵、音楽などの芸術分野と、 [[hobby|趣味]] [[gakuchika|ガクチカ]] [[",
+          "position": 1104,
           "original_text": "[[hobby|趣味]]"
         },
         {
           "target_slug": "gakuchika",
           "link_type": "WikiLink",
-          "context": "# About Khimoo [[math|数学]] [[hobby|趣味]] [[gakuchika|ガクチカ]] [[myworks|個人開発]]",
-          "position": 50,
+          "context": "理論の整備をするよりも問題を解くことの方が多いのは数学にしてはめずらしいのかなと思います。 ## 趣味 絵、音楽などの芸術分野と、 [[hobby|趣味]] [[gakuchika|ガクチカ]] [[",
+          "position": 1121,
           "original_text": "[[gakuchika|ガクチカ]]"
         },
         {
           "target_slug": "myworks",
           "link_type": "WikiLink",
-          "context": "Khimoo [[math|数学]] [[hobby|趣味]] [[gakuchika|ガクチカ]] [[myworks|個人開発]]",
-          "position": 77,
+          "context": "趣味 絵、音楽などの芸術分野と、 [[hobby|趣味]] [[gakuchika|ガクチカ]] [[myworks|個人開発]]",
+          "position": 1148,
           "original_text": "[[myworks|個人開発]]"
         }
       ],
       "inbound_count": 0,
-      "processed_at": "2025-12-28T17:51:14.221744859+00:00"
+      "processed_at": "2026-01-01T14:30:26.611723296+00:00"
     },
     {
       "slug": "math",
       "title": "数学",
-      "content": "",
+      "content": "[[continuum_theory]]",
       "metadata": {
         "title": "数学",
         "home_display": true,
@@ -169,9 +188,17 @@
         "author_image": null
       },
       "file_path": "articles/math.md",
-      "outbound_links": [],
+      "outbound_links": [
+        {
+          "target_slug": "continuum_theory",
+          "link_type": "WikiLink",
+          "context": "[[continuum_theory]]",
+          "position": 0,
+          "original_text": "[[continuum_theory]]"
+        }
+      ],
       "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.221954630+00:00"
+      "processed_at": "2026-01-01T14:30:26.612273485+00:00"
     },
     {
       "slug": "絵",
@@ -191,7 +218,27 @@
       "file_path": "articles/絵.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.222139404+00:00"
+      "processed_at": "2026-01-01T14:30:26.612471546+00:00"
+    },
+    {
+      "slug": "continuum_theory",
+      "title": "continuum_theory",
+      "content": "",
+      "metadata": {
+        "title": "continuum_theory",
+        "home_display": true,
+        "category": "",
+        "importance": 2,
+        "related_articles": [],
+        "tags": [],
+        "created_at": null,
+        "updated_at": null,
+        "author_image": null
+      },
+      "file_path": "articles/continuum_theory.md",
+      "outbound_links": [],
+      "inbound_count": 3,
+      "processed_at": "2026-01-01T14:30:26.612623830+00:00"
     },
     {
       "slug": "家庭菜園",
@@ -211,12 +258,12 @@
       "file_path": "articles/家庭菜園.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.222325330+00:00"
+      "processed_at": "2026-01-01T14:30:26.612836468+00:00"
     },
     {
       "slug": "hobby",
       "title": "趣味",
-      "content": "[[プログラミング]]\n[[Linux]]\n[[Neovim]]\n[[家庭菜園]]\n[[絵]]\n[[音楽]]",
+      "content": "[[プログラミング]]\n[[Linux]]\n[[Neovim]]\n[[家庭菜園]]\n[[絵]]\n[[音楽]]\n[[myworks|個人開発]]",
       "metadata": {
         "title": "趣味",
         "home_display": true,
@@ -224,8 +271,8 @@
         "importance": 4,
         "related_articles": [],
         "tags": [],
-        "created_at": "2025-12-28T18:30:38Z",
-        "updated_at": "2025-12-29T00:52:59Z",
+        "created_at": "2025-12-29T03:30:38Z",
+        "updated_at": "2026-01-01T22:38:01Z",
         "author_image": null
       },
       "file_path": "articles/hobby.md",
@@ -240,41 +287,48 @@
         {
           "target_slug": "linux",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
+          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]] [[myworks|個人開発]]",
           "position": 26,
           "original_text": "[[Linux]]"
         },
         {
           "target_slug": "neovim",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
+          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]] [[myworks|個人開発]]",
           "position": 36,
           "original_text": "[[Neovim]]"
         },
         {
           "target_slug": "家庭菜園",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
+          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]] [[myworks|個人開発]]",
           "position": 47,
           "original_text": "[[家庭菜園]]"
         },
         {
           "target_slug": "絵",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
+          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]] [[myworks|個人開発]]",
           "position": 64,
           "original_text": "[[絵]]"
         },
         {
           "target_slug": "音楽",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
+          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]] [[myworks|個人開発]]",
           "position": 72,
           "original_text": "[[音楽]]"
+        },
+        {
+          "target_slug": "myworks",
+          "link_type": "WikiLink",
+          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]] [[myworks|個人開発]]",
+          "position": 83,
+          "original_text": "[[myworks|個人開発]]"
         }
       ],
       "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.223971186+00:00"
+      "processed_at": "2026-01-01T14:30:26.614828183+00:00"
     },
     {
       "slug": "プログラミング",
@@ -294,11 +348,11 @@
       "file_path": "articles/プログラミング.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2025-12-28T17:51:14.224219027+00:00"
+      "processed_at": "2026-01-01T14:30:26.615130478+00:00"
     }
   ],
-  "generated_at": "2025-12-28T17:51:14.224335434+00:00",
-  "total_count": 11,
+  "generated_at": "2026-01-01T14:30:26.615270771+00:00",
+  "total_count": 12,
   "home_articles": [
     "neovim",
     "myworks",
@@ -308,6 +362,7 @@
     "about-khimoo",
     "math",
     "絵",
+    "continuum_theory",
     "家庭菜園",
     "hobby",
     "プログラミング"
