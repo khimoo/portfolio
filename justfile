@@ -160,11 +160,13 @@ _verify-images:
         echo "❌ Image directory not found!" && exit 1; \
     fi
     @# Check file formats and sizes
-    @for img in khimoo-portfolio/articles/img/*.{png,webp,jpg,jpeg} 2>/dev/null; do \
-        if [ -f "$img" ]; then \
-            echo "🔍 $(basename $img): $(file $img | cut -d: -f2 | xargs) - $(ls -lh $img | awk '{print $5}')"; \
-        fi; \
-    done
+    @for ext in png webp jpg jpeg; do \
+        for img in khimoo-portfolio/articles/img/*.$${ext}; do \
+            if [ -f "$${img}" ]; then \
+                echo "🔍 $$(basename $${img}): $$(file $${img} | cut -d: -f2 | xargs) - $$(ls -lh $${img} | awk '{print $$5}')"; \
+            fi; \
+        done; \
+    done 2>/dev/null || true
 
 # Verify article processing results including JSON validation and content checks
 _verify-article-processing:
