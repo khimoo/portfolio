@@ -1,17 +1,33 @@
 ---
-title: "Khimoo"
-author_image: "/articles/img/author_img.png"
+title: 自己紹介
+author_image: /articles/img/author_img.png
 home_display: true
 importance: 5
-category: "author"
-tags: ["about", "profile", "author"]
-created_at: "2024-01-01T09:00:00Z"
-updated_at: "2025-12-29T02:19:34Z"
+category: author
+tags:
+  - profile
+created_at: "2024-01-02T03:00:00Z"
+updated_at: "2026-01-01T23:24:57Z"
 ---
-
-# About Khimoo
-
-[[math|数学]]
+# プロフィール
+日比野 文です。
+芸術、プログラミング、物理などに興味があり、全部の基礎を求めて数学科に進学しました!
+現在は[[continuum_theory|連続体理論]]について勉強しています!
+![[author_img.png]]
+# 経歴
+2001年 山形県天童市生まれ
+2017年 山形県立山形南高校 入学
+2020年 山形県立山形南高校 卒業
+2021年 筑波大学 理工学群 数学類 入学
+2025年 筑波大学 理工学群 数学類 卒業
+2025年 筑波大学 理工情報生命学術院 数理物質科学研究群 数学学位プログラム 入学
+# 専門
+[[math|数学]]\\[[continuum_theory|連続体理論]]
+位相空間論の分野で、いわゆる病的な空間というものを扱います。
+人間によって課題(ワルシャワサークル、メンガーのスポンジなど)を用意し、人間によってそれを調査します。
+理論の整備をするよりも問題を解くことの方が多いのは数学にしてはめずらしいのかなと思います。
+## 趣味
+絵、音楽などの芸術分野と、
 [[hobby|趣味]]
 [[gakuchika|ガクチカ]]
 [[myworks|個人開発]]
