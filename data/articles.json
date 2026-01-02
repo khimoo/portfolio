@@ -18,12 +18,12 @@
       "file_path": "articles/music.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T10:26:12.066377031+00:00"
+      "processed_at": "2026-01-02T15:22:59.380326259+00:00"
     },
     {
       "slug": "neovim",
       "title": "Neovim",
-      "content": "",
+      "content": "\nNeovimは高度にカスタマイズ可能なテキストエディタです。\n\n## 特徴\n\n- 高速で軽量\n- 豊富なプラグインエコシステム\n- Lua設定サポート\n- 非同期処理\n\nプログラミングに最適なエディタの一つです。",
       "metadata": {
         "title": "Neovim",
         "home_display": true,
@@ -38,7 +38,7 @@
       "file_path": "articles/Neovim.md",
       "outbound_links": [],
       "inbound_count": 2,
-      "processed_at": "2026-01-02T10:26:12.066575051+00:00"
+      "processed_at": "2026-01-02T15:22:59.380556070+00:00"
     },
     {
       "slug": "myworks",
@@ -58,7 +58,7 @@
       "file_path": "articles/myworks.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T10:26:12.066770316+00:00"
+      "processed_at": "2026-01-02T15:22:59.380751597+00:00"
     },
     {
       "slug": "mini_farm",
@@ -78,7 +78,7 @@
       "file_path": "articles/mini_farm.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T10:26:12.066972334+00:00"
+      "processed_at": "2026-01-02T15:22:59.380962242+00:00"
     },
     {
       "slug": "linux",
@@ -98,7 +98,7 @@
       "file_path": "articles/Linux.md",
       "outbound_links": [],
       "inbound_count": 2,
-      "processed_at": "2026-01-02T10:26:12.067164533+00:00"
+      "processed_at": "2026-01-02T15:22:59.381163691+00:00"
     },
     {
       "slug": "drawing",
@@ -118,7 +118,7 @@
       "file_path": "articles/drawing.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T10:26:12.067432423+00:00"
+      "processed_at": "2026-01-02T15:22:59.381402168+00:00"
     },
     {
       "slug": "gakuchika",
@@ -137,13 +137,13 @@
       },
       "file_path": "articles/gakuchika.md",
       "outbound_links": [],
-      "inbound_count": 1,
-      "processed_at": "2026-01-02T10:26:12.067619904+00:00"
+      "inbound_count": 0,
+      "processed_at": "2026-01-02T15:22:59.381591724+00:00"
     },
     {
       "slug": "about-khimoo",
       "title": "自己紹介",
-      "content": "# プロフィール\n日比野 文です。\n芸術、プログラミング、物理などに興味があり、全部の基礎を求めて数学科に進学しました!\n現在は[[continuum_theory|連続体理論]]について勉強しています!\n![[author_img.png]]\n# 経歴\n2001年 山形県天童市生まれ\n2017年 山形県立山形南高校 入学\n2020年 山形県立山形南高校 卒業\n2021年 筑波大学 理工学群 数学類 入学\n2025年 筑波大学 理工学群 数学類 卒業\n2025年 筑波大学 理工情報生命学術院 数理物質科学研究群 数学学位プログラム 入学\n# 専門\n[[math|数学]]\\\\[[continuum_theory|連続体理論]]\n位相空間論の分野で、いわゆる病的な空間というものを扱います。\n人間によって課題(ワルシャワサークル、メンガーのスポンジなど)を用意し、人間によってそれを調査します。\n理論の整備をするよりも問題を解くことの方が多いのは数学にしてはめずらしいのかなと思います。\n## 趣味\n絵、音楽などの芸術分野と、 \n[[hobby|趣味]]\n[[gakuchika|ガクチカ]]\n[[myworks|個人開発]]",
+      "content": "# プロフィール\n日比野 文です。\\\n[専門](math)：[数学](math)\\\\[連続体理論](continuum_theory)\\\n[趣味](hobby)：絵、音楽、漫画、映画、Neovim、NixOS、Rust、家庭菜園(アクアポニックス)\\\n![](author_img.png)\n# 経歴\n2001年 山形県天童市生まれ\\\n2017年 山形県立山形南高校 入学\\\n2020年 山形県立山形南高校 卒業\\\n2021年 筑波大学 理工学群 数学類 入学\\\n2025年 筑波大学 理工学群 数学類 卒業\\\n2025年 筑波大学 理工情報生命学術院 数理物質科学研究群 数学学位プログラム 入学\\\n\n# アルバイト経験\n2023-2025年 株式会社shinonomeでバックエンド処理、API開発\n2026年-現在 シリコンスタジオで開発環境整備\n\n# 個人開発\n[個人開発](myworks)を参照ください。",
       "metadata": {
         "title": "自己紹介",
         "home_display": true,
@@ -152,63 +152,49 @@
         "related_articles": [],
         "tags": [],
         "created_at": "2024-01-02T03:00:00Z",
-        "updated_at": "2026-01-02T17:52:00Z",
+        "updated_at": "2026-01-02T23:35:11Z",
         "author_image": "/articles/img/author_img.png"
       },
       "file_path": "articles/about-khimoo.md",
       "outbound_links": [
         {
-          "target_slug": "continuum_theory",
-          "link_type": "WikiLink",
-          "context": "文です。 芸術、プログラミング、物理などに興味があり、全部の基礎を求めて数学科に進学しました! 現在は[[continuum_theory|連続体理論]]について勉強しています! ![[author_",
-          "position": 178,
-          "original_text": "[[continuum_theory|連続体理論]]"
-        },
-        {
-          "target_slug": "author_imgpng",
-          "link_type": "WikiLink",
-          "context": "芸術、プログラミング、物理などに興味があり、全部の基礎を求めて数学科に進学しました! 現在は[[continuum_theory|連続体理論]]について勉強しています! ![[author_img.p",
-          "position": 250,
-          "original_text": "[[author_img.png]]"
+          "target_slug": "math",
+          "link_type": "MarkdownLink",
+          "context": "# プロフィール 日比野 文です。\\ [専門](math)：[数学](math)\\\\[連続体理論](continuum_theory)\\ [趣味](hobby)：絵、音楽、漫画、映画、Neovim、N",
+          "position": 45,
+          "original_text": "[専門](math)"
         },
         {
           "target_slug": "math",
-          "link_type": "WikiLink",
-          "context": "2025年 筑波大学 理工情報生命学術院 数理物質科学研究群 数学学位プログラム 入学 # 専門 [[math|数学]]\\\\[[continuum_theory|連続体理論]] 位相空間論の分野で、い",
-          "position": 623,
-          "original_text": "[[math|数学]]"
+          "link_type": "MarkdownLink",
+          "context": "# プロフィール 日比野 文です。\\ [専門](math)：[数学](math)\\\\[連続体理論](continuum_theory)\\ [趣味](hobby)：絵、音楽、漫画、映画、Neovim、N",
+          "position": 62,
+          "original_text": "[数学](math)"
         },
         {
           "target_slug": "continuum_theory",
-          "link_type": "WikiLink",
-          "context": "理工情報生命学術院 数理物質科学研究群 数学学位プログラム 入学 # 専門 [[math|数学]]\\\\[[continuum_theory|連続体理論]] 位相空間論の分野で、いわゆる病的な空間という",
-          "position": 640,
-          "original_text": "[[continuum_theory|連続体理論]]"
+          "link_type": "MarkdownLink",
+          "context": "# プロフィール 日比野 文です。\\ [専門](math)：[数学](math)\\\\[連続体理論](continuum_theory)\\ [趣味](hobby)：絵、音楽、漫画、映画、Neovim、N",
+          "position": 78,
+          "original_text": "[連続体理論](continuum_theory)"
         },
         {
           "target_slug": "hobby",
-          "link_type": "WikiLink",
-          "context": "理論の整備をするよりも問題を解くことの方が多いのは数学にしてはめずらしいのかなと思います。 ## 趣味 絵、音楽などの芸術分野と、 [[hobby|趣味]] [[gakuchika|ガクチカ]] [[",
-          "position": 1105,
-          "original_text": "[[hobby|趣味]]"
-        },
-        {
-          "target_slug": "gakuchika",
-          "link_type": "WikiLink",
-          "context": "理論の整備をするよりも問題を解くことの方が多いのは数学にしてはめずらしいのかなと思います。 ## 趣味 絵、音楽などの芸術分野と、 [[hobby|趣味]] [[gakuchika|ガクチカ]] [[",
-          "position": 1122,
-          "original_text": "[[gakuchika|ガクチカ]]"
+          "link_type": "MarkdownLink",
+          "context": "[専門](math)：[数学](math)\\\\[連続体理論](continuum_theory)\\ [趣味](hobby)：絵、音楽、漫画、映画、Neovim、NixOS、Rust、家庭菜園(アクアポ",
+          "position": 115,
+          "original_text": "[趣味](hobby)"
         },
         {
           "target_slug": "myworks",
-          "link_type": "WikiLink",
-          "context": "趣味 絵、音楽などの芸術分野と、 [[hobby|趣味]] [[gakuchika|ガクチカ]] [[myworks|個人開発]]",
-          "position": 1149,
-          "original_text": "[[myworks|個人開発]]"
+          "link_type": "MarkdownLink",
+          "context": "株式会社shinonomeでバックエンド処理、API開発 2026年-現在 シリコンスタジオで開発環境整備 # 個人開発 [個人開発](myworks)を参照ください。",
+          "position": 777,
+          "original_text": "[個人開発](myworks)"
         }
       ],
       "inbound_count": 0,
-      "processed_at": "2026-01-02T10:26:12.070031421+00:00"
+      "processed_at": "2026-01-02T15:22:59.382644811+00:00"
     },
     {
       "slug": "math",
@@ -235,8 +221,8 @@
           "original_text": "[[continuum_theory]]"
         }
       ],
-      "inbound_count": 1,
-      "processed_at": "2026-01-02T10:26:12.070491711+00:00"
+      "inbound_count": 2,
+      "processed_at": "2026-01-02T15:22:59.383384940+00:00"
     },
     {
       "slug": "programming",
@@ -271,7 +257,7 @@
         }
       ],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T10:26:12.071136967+00:00"
+      "processed_at": "2026-01-02T15:22:59.384208817+00:00"
     },
     {
       "slug": "continuum_theory",
@@ -290,8 +276,8 @@
       },
       "file_path": "articles/continuum_theory.md",
       "outbound_links": [],
-      "inbound_count": 3,
-      "processed_at": "2026-01-02T10:26:12.071309760+00:00"
+      "inbound_count": 2,
+      "processed_at": "2026-01-02T15:22:59.384392712+00:00"
     },
     {
       "slug": "hobby",
@@ -354,10 +340,10 @@
         }
       ],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T10:26:12.072895514+00:00"
+      "processed_at": "2026-01-02T15:22:59.386231394+00:00"
     }
   ],
-  "generated_at": "2026-01-02T10:26:12.073104104+00:00",
+  "generated_at": "2026-01-02T15:22:59.386478397+00:00",
   "total_count": 12,
   "home_articles": [
     "music",
