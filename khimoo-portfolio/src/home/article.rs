@@ -396,7 +396,7 @@ pub fn article_view(props: &ArticleViewProps) -> Html {
                                                 src={resolved_image_path}
                                                 alt="Author image"
                                                 style="
-                                                    height: 100%;
+                                                    height: 120px;
                                                     // aspect-ratio: 1;
                                                     object-fit: cover;
                                                     // min-height: 60px;
