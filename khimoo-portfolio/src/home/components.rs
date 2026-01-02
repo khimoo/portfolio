@@ -747,10 +747,10 @@ fn calculate_dynamic_radius(base_radius: i32, importance: Option<u8>, inbound_co
     // 重要度に基づくサイズ調整 (1-5スケール)
     if let Some(imp) = importance {
         let importance_bonus = match imp {
-            1 => -5, // 小さく
-            2 => -3,
-            3 => 0,  // ベースサイズ
-            4 => 5,  // 大きく
+            1 => -10,
+            2 => 0,
+            3 => 10,
+            4 => 20,
             5 => 40, // 作者ノード
             _ => 0,
         };
@@ -759,8 +759,9 @@ fn calculate_dynamic_radius(base_radius: i32, importance: Option<u8>, inbound_co
 
     // インバウンドリンク数に基づくサイズ調整
     let popularity_bonus = (inbound_count as f32).sqrt() as i32 * 3;
-    size += popularity_bonus;
+    size + popularity_bonus
+    /* size += popularity_bonus;
 
     // 最小・最大サイズの制限
-    size.clamp(15, 100)
+    size.clamp(15, 100) */
 }

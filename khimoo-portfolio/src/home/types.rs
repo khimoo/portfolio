@@ -422,7 +422,7 @@ impl NodeRegistry {
         let importance = self.get_node_importance(node_id);
 
         if let Some(5) = importance {
-            visual_radius as f32 * 2.1
+            visual_radius as f32 * 2.5
         } else {
             visual_radius as f32
         }
