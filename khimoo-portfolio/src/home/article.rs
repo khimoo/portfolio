@@ -1,32 +1,34 @@
-use yew::prelude::*;
-use pulldown_cmark::{html, Parser};
-use yew::virtual_dom::AttrValue;
 use super::data_loader::{use_article_content, use_lightweight_articles};
-use yew_router::prelude::*;
 use super::routes::Route;
+use super::utils::resolve_image_path;
+use pulldown_cmark::{html, Parser};
 use regex::Regex;
-use web_sys::HtmlAnchorElement;
 use wasm_bindgen::JsCast;
-
+use web_sys::HtmlAnchorElement;
+use yew::prelude::*;
+use yew::virtual_dom::AttrValue;
+use yew_router::prelude::*;
 
 fn process_wiki_links(content: &str) -> String {
     // [[...]] の中身を取り出す
     let wiki_regex = Regex::new(r"\[\[([^\]]+)\]\]").unwrap();
 
-    wiki_regex.replace_all(content, |caps: &regex::Captures| {
-        let inner = caps.get(1).unwrap().as_str();
-        // '|' があれば左側をリンクターゲット、右側を表示テキストとして扱う
-        let parts: Vec<&str> = inner.splitn(2, '|').collect();
-        let (link_target, display) = if parts.len() == 2 {
-            (parts[0].trim(), parts[1].trim())
-        } else {
-            (inner.trim(), inner.trim())
-        };
+    wiki_regex
+        .replace_all(content, |caps: &regex::Captures| {
+            let inner = caps.get(1).unwrap().as_str();
+            // '|' があれば左側をリンクターゲット、右側を表示テキストとして扱う
+            let parts: Vec<&str> = inner.splitn(2, '|').collect();
+            let (link_target, display) = if parts.len() == 2 {
+                (parts[0].trim(), parts[1].trim())
+            } else {
+                (inner.trim(), inner.trim())
+            };
 
-        let slug = generate_slug_from_title(link_target);
-        // マーカーは -- slug と display を :: で区切る形式にする
-        format!("WIKILINKSTART:{}::{}::WIKILINKEND", slug, display)
-    }).to_string()
+            let slug = generate_slug_from_title(link_target);
+            // マーカーは -- slug と display を :: で区切る形式にする
+            format!("WIKILINKSTART:{}::{}::WIKILINKEND", slug, display)
+        })
+        .to_string()
 }
 
 fn convert_wiki_markers_to_html(html_content: &str) -> String {
@@ -34,11 +36,16 @@ fn convert_wiki_markers_to_html(html_content: &str) -> String {
     // 非貪欲マッチ (.*?) を使い display 部分を正しく取得する
     let marker_regex = Regex::new(r"WIKILINKSTART:([^:]+)::(.*?)::WIKILINKEND").unwrap();
 
-    marker_regex.replace_all(html_content, |caps: &regex::Captures| {
-        let slug = &caps[1];
-        let title = &caps[2];
-        format!(r#"<a href="/article/{}" class="wiki-link">{}</a>"#, slug, title)
-    }).to_string()
+    marker_regex
+        .replace_all(html_content, |caps: &regex::Captures| {
+            let slug = &caps[1];
+            let title = &caps[2];
+            format!(
+                r#"<a href="/article/{}" class="wiki-link">{}</a>"#,
+                slug, title
+            )
+        })
+        .to_string()
 }
 
 /// Generate a slug from article title (same logic as in article_processing.rs)
@@ -64,7 +71,7 @@ pub fn article_index() -> Html {
 
     if *loading {
         return html! {
-            <div style="padding: 16px;">
+            <div style="background:#081D35; padding: 16px; height:100%">
                 <h1>{"Articles"}</h1>
                 <p>{"Loading articles..."}</p>
             </div>
@@ -214,8 +221,10 @@ pub fn article_view(props: &ArticleViewProps) -> Html {
                 // ※URLの構造に依存します。ここでは単純に最後のセグメントを取得
                 if let Some(slug) = pathname.split('/').last() {
                     if !slug.is_empty() {
-                         // ここで <Link> と同じ動き（ルーター遷移）を実行
-                        navigator.push(&Route::ArticleShow { slug: slug.to_string() });
+                        // ここで <Link> と同じ動き（ルーター遷移）を実行
+                        navigator.push(&Route::ArticleShow {
+                            slug: slug.to_string(),
+                        });
                     }
                 }
             }
@@ -267,26 +276,26 @@ pub fn article_view(props: &ArticleViewProps) -> Html {
         };
     }
 
-if let Some(article_data) = article.as_ref() {
-    // 1. 本文をそのまま取得
-    let raw_content = &article_data.content;
+    if let Some(article_data) = article.as_ref() {
+        // 1. 本文をそのまま取得
+        let raw_content = &article_data.content;
 
-    // 2. Wikiリンク記法をマーカーに変換
-    // ここで変換されないと、Markdownパーサーが [[ ]] をリンクとして認識しません
-    let processed_content = process_wiki_links(raw_content);
+        // 2. Wikiリンク記法をマーカーに変換
+        // ここで変換されないと、Markdownパーサーが [[ ]] をリンクとして認識しません
+        let processed_content = process_wiki_links(raw_content);
 
-    // 3. Markdown を HTML に変換
-    let parser = Parser::new(&processed_content);
-    let mut html_output = String::new();
-    html::push_html(&mut html_output, parser);
+        // 3. Markdown を HTML に変換
+        let parser = Parser::new(&processed_content);
+        let mut html_output = String::new();
+        html::push_html(&mut html_output, parser);
 
-    // 4. 【重要】生成されたHTML文字列に対して、マーカーを <a> タグに置換
-    // Markdownパーサーが特殊文字をエスケープしている可能性があるため、
-    // 最終的なHTML文字列に対して実行するのが最も確実です。
-    let final_html = convert_wiki_markers_to_html(&html_output);
+        // 4. 【重要】生成されたHTML文字列に対して、マーカーを <a> タグに置換
+        // Markdownパーサーが特殊文字をエスケープしている可能性があるため、
+        // 最終的なHTML文字列に対して実行するのが最も確実です。
+        let final_html = convert_wiki_markers_to_html(&html_output);
 
-    // 5. HTMLとしてレンダリング
-    let rendered = Html::from_html_unchecked(AttrValue::from(final_html));
+        // 5. HTMLとしてレンダリング
+        let rendered = Html::from_html_unchecked(AttrValue::from(final_html));
 
         html! {
             <>
@@ -322,60 +331,78 @@ if let Some(article_data) = article.as_ref() {
                      "}
                 </style>
                 <div style="padding: 16px; max-width: 800px; margin: 0 auto; background: #081D35; min-height: 100vh;">
-                    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                        <Link<Route> to={Route::Home}>
-                            <button style="padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                                {"← Back to Home"}
-                            </button>
-                        </Link<Route>>
-                        <Link<Route> to={Route::ArticleIndex}>
-                            <button style="padding: 8px 16px; background: #4a5568; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                                {"All Articles"}
-                            </button>
-                        </Link<Route>>
-                    </div>
+                    // <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    //     <Link<Route> to={Route::Home}>
+                    //         <button style="padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    //             {"← Back to Home"}
+                    //         </button>
+                    //     </Link<Route>>
+                    //     <Link<Route> to={Route::ArticleIndex}>
+                    //         <button style="padding: 8px 16px; background: #4a5568; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    //             {"All Articles"}
+                    //         </button>
+                    //     </Link<Route>>
+                    // </div>
 
                     <article>
-                        <header style="margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #444;">
-                            <h1 style="margin: 0 0 16px 0; font-size: 2.5em; color: #e0e0e0;">{&article_data.title}</h1>
-                            <div style="font-size: 14px; color: #aaa; display: flex; gap: 16px; flex-wrap: wrap;">
-                                {
-                                    if let Some(category) = &article_data.metadata.category {
-                                        html! { <span>{"Category: "}<strong>{category}</strong></span> }
-                                    } else {
-                                        html! {}
-                                    }
-                                }
-                                {
-                                    if let Some(importance) = article_data.metadata.importance {
-                                        html! { <span>{"Importance: "}<strong>{importance}{"/5"}</strong></span> }
-                                    } else {
-                                        html! {}
-                                    }
-                                }
-                                <span>{"Inbound links: "}<strong>{article_data.inbound_count}</strong></span>
-                                {
-                                    if !article_data.metadata.tags.is_empty() {
-                                        html! {
-                                            <span>
-                                                {"Tags: "}
-                                                {
-                                                    article_data.metadata.tags.iter().enumerate().map(|(i, tag)| {
-                                                        html! {
-                                                            <>
-                                                                {if i > 0 { ", " } else { "" }}
-                                                                <span style="background: #4a5568; color: #e0e0e0; padding: 2px 6px; border-radius: 3px; font-size: 12px;">{tag}</span>
-                                                            </>
-                                                        }
-                                                    }).collect::<Html>()
-                                                }
-                                            </span>
+                        <header style="margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #444; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+                            <div style="flex: 1;">
+                                <h1 style="margin: 0 0 16px 0; font-size: 2.5em; color: #e0e0e0;">{&article_data.title}</h1>
+                                <div style="font-size: 14px; color: #aaa; display: flex; gap: 16px; flex-wrap: wrap;">
+                                    {
+                                        if let Some(category) = &article_data.metadata.category {
+                                            html! { <span>{"Category: "}<strong>{category}</strong></span> }
+                                        } else {
+                                            html! {}
                                         }
-                                    } else {
-                                        html! {}
                                     }
-                                }
+                                    {
+                                        if let Some(importance) = article_data.metadata.importance {
+                                            html! { <span>{"Importance: "}<strong>{importance}{"/5"}</strong></span> }
+                                        } else {
+                                            html! {}
+                                        }
+                                    }
+                                    <span>{"Inbound links: "}<strong>{article_data.inbound_count}</strong></span>
+                                    {
+                                        if !article_data.metadata.tags.is_empty() {
+                                            html! {
+                                                <span>
+                                                    {"Tags: "}
+                                                    {
+                                                        article_data.metadata.tags.iter().enumerate().map(|(i, tag)| {
+                                                            html! {
+                                                                <>
+                                                                    {if i > 0 { ", " } else { "" }}
+                                                                    <span style="background: #4a5568; color: #e0e0e0; padding: 2px 6px; border-radius: 3px; font-size: 12px;">{tag}</span>
+                                                                </>
+                                                            }
+                                                        }).collect::<Html>()
+                                                    }
+                                                </span>
+                                            }
+                                        } else {
+                                            html! {}
+                                        }
+                                    }
+                                </div>
                             </div>
+                            {
+                                if let Some(author_image) = &article_data.metadata.author_image {
+                                    let resolved_image_path = resolve_image_path(author_image);
+                                    html! {
+                                        <div style="flex-shrink: 0;">
+                                            <img
+                                                src={resolved_image_path}
+                                                alt="Author image"
+                                                style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #66b3ff;"
+                                            />
+                                        </div>
+                                    }
+                                } else {
+                                    html! {}
+                                }
+                            }
                         </header>
 
                         // ここでリンク化されたHTMLがレンダリングされます

@@ -2,6 +2,7 @@ use super::data_loader::{use_articles_data, ArticlesData, ProcessedArticle};
 use super::physics_sim::{PhysicsWorld, Viewport};
 use super::types::*;
 use super::routes::Route;
+use super::utils::resolve_image_path;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
@@ -28,9 +29,9 @@ fn determine_node_content(article: &ProcessedArticle) -> NodeContent {
         let optimized_image_url = if image_url.starts_with("/articles/") {
             // 元の画像パスから最適化された中サイズ画像パスを生成
             let optimized_path = image_url.replace("/articles/img/author_img.png", "/articles/img/author_img_medium.png");
-            format!("/portfolio-page{}", optimized_path)
+            resolve_image_path(&optimized_path)
         } else {
-            image_url.clone()
+            resolve_image_path(image_url)
         };
 
         NodeContent::Author {

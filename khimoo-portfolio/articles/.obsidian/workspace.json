@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "hobby.md",
+                "file": "about-khimoo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "hobby"
+              "title": "about-khimoo"
             }
           }
         ]
@@ -186,8 +186,8 @@
   },
   "active": "12e1fb2632b2fdcf",
   "lastOpenFiles": [
-    "programming.md",
     "hobby.md",
+    "programming.md",
     "gakuchika.md",
     "about-khimoo.md",
     "about-khimoo.md~",
