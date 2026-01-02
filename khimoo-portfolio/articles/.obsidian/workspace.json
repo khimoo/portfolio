@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "プログラミング.md",
+                "file": "hobby.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "プログラミング"
+              "title": "hobby"
             }
           }
         ]
@@ -186,6 +186,7 @@
   },
   "active": "12e1fb2632b2fdcf",
   "lastOpenFiles": [
+    "programming.md",
     "hobby.md",
     "gakuchika.md",
     "about-khimoo.md",
@@ -194,14 +195,13 @@
     "img/author_img_small.png",
     "img/author_img_medium.png",
     "continuum_theory.md",
-    "絵.md",
-    "音楽.md",
+    "drawing.md",
+    "music.md",
     "math.md",
     "Linux.md",
     "myworks.md",
     "無題のファイル.base",
-    "家庭菜園.md",
-    "プログラミング.md",
+    "mini_farm.md",
     "Neovim.md",
     "test.md",
     "Templates/template_article.md",
