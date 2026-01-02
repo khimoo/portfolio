@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "slug": "music",
+      "title": "音楽",
+      "content": "",
+      "metadata": {
+        "title": "音楽",
+        "home_display": true,
+        "category": "",
+        "importance": 2,
+        "related_articles": [],
+        "tags": [],
+        "created_at": "2025-12-28T18:30:38Z",
+        "updated_at": "2025-12-29T00:52:22Z",
+        "author_image": null
+      },
+      "file_path": "articles/music.md",
+      "outbound_links": [],
+      "inbound_count": 1,
+      "processed_at": "2026-01-02T10:26:12.066377031+00:00"
+    },
+    {
       "slug": "neovim",
       "title": "Neovim",
       "content": "",
@@ -18,7 +38,7 @@
       "file_path": "articles/Neovim.md",
       "outbound_links": [],
       "inbound_count": 2,
-      "processed_at": "2026-01-02T09:44:48.376643946+00:00"
+      "processed_at": "2026-01-02T10:26:12.066575051+00:00"
     },
     {
       "slug": "myworks",
@@ -38,7 +58,27 @@
       "file_path": "articles/myworks.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T09:44:48.376818944+00:00"
+      "processed_at": "2026-01-02T10:26:12.066770316+00:00"
+    },
+    {
+      "slug": "mini_farm",
+      "title": "家庭菜園",
+      "content": "",
+      "metadata": {
+        "title": "家庭菜園",
+        "home_display": true,
+        "category": "",
+        "importance": 2,
+        "related_articles": [],
+        "tags": [],
+        "created_at": "2025-12-28T18:30:38Z",
+        "updated_at": "2025-12-29T00:52:32Z",
+        "author_image": null
+      },
+      "file_path": "articles/mini_farm.md",
+      "outbound_links": [],
+      "inbound_count": 1,
+      "processed_at": "2026-01-02T10:26:12.066972334+00:00"
     },
     {
       "slug": "linux",
@@ -58,7 +98,27 @@
       "file_path": "articles/Linux.md",
       "outbound_links": [],
       "inbound_count": 2,
-      "processed_at": "2026-01-02T09:44:48.376982628+00:00"
+      "processed_at": "2026-01-02T10:26:12.067164533+00:00"
+    },
+    {
+      "slug": "drawing",
+      "title": "絵",
+      "content": "",
+      "metadata": {
+        "title": "絵",
+        "home_display": true,
+        "category": "",
+        "importance": 2,
+        "related_articles": [],
+        "tags": [],
+        "created_at": "2025-12-28T18:30:38Z",
+        "updated_at": "2025-12-29T00:52:41Z",
+        "author_image": null
+      },
+      "file_path": "articles/drawing.md",
+      "outbound_links": [],
+      "inbound_count": 1,
+      "processed_at": "2026-01-02T10:26:12.067432423+00:00"
     },
     {
       "slug": "gakuchika",
@@ -78,27 +138,7 @@
       "file_path": "articles/gakuchika.md",
       "outbound_links": [],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T09:44:48.377177910+00:00"
-    },
-    {
-      "slug": "音楽",
-      "title": "音楽",
-      "content": "",
-      "metadata": {
-        "title": "音楽",
-        "home_display": true,
-        "category": "",
-        "importance": 2,
-        "related_articles": [],
-        "tags": [],
-        "created_at": "2025-12-28T18:30:38Z",
-        "updated_at": "2025-12-29T00:52:22Z",
-        "author_image": null
-      },
-      "file_path": "articles/音楽.md",
-      "outbound_links": [],
-      "inbound_count": 1,
-      "processed_at": "2026-01-02T09:44:48.377400711+00:00"
+      "processed_at": "2026-01-02T10:26:12.067619904+00:00"
     },
     {
       "slug": "about-khimoo",
@@ -168,7 +208,7 @@
         }
       ],
       "inbound_count": 0,
-      "processed_at": "2026-01-02T09:44:48.379599432+00:00"
+      "processed_at": "2026-01-02T10:26:12.070031421+00:00"
     },
     {
       "slug": "math",
@@ -196,27 +236,42 @@
         }
       ],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T09:44:48.380109003+00:00"
+      "processed_at": "2026-01-02T10:26:12.070491711+00:00"
     },
     {
-      "slug": "絵",
-      "title": "絵",
-      "content": "",
+      "slug": "programming",
+      "title": "プログラミング",
+      "content": "[[Linux]]\n[[Neovim]]",
       "metadata": {
-        "title": "絵",
+        "title": "プログラミング",
         "home_display": true,
         "category": "",
         "importance": 2,
         "related_articles": [],
         "tags": [],
         "created_at": "2025-12-28T18:30:38Z",
-        "updated_at": "2025-12-29T00:52:41Z",
+        "updated_at": "2026-01-02T18:00:11Z",
         "author_image": null
       },
-      "file_path": "articles/絵.md",
-      "outbound_links": [],
+      "file_path": "articles/programming.md",
+      "outbound_links": [
+        {
+          "target_slug": "linux",
+          "link_type": "WikiLink",
+          "context": "[[Linux]] [[Neovim]]",
+          "position": 0,
+          "original_text": "[[Linux]]"
+        },
+        {
+          "target_slug": "neovim",
+          "link_type": "WikiLink",
+          "context": "[[Linux]] [[Neovim]]",
+          "position": 10,
+          "original_text": "[[Neovim]]"
+        }
+      ],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T09:44:48.380310523+00:00"
+      "processed_at": "2026-01-02T10:26:12.071136967+00:00"
     },
     {
       "slug": "continuum_theory",
@@ -236,32 +291,12 @@
       "file_path": "articles/continuum_theory.md",
       "outbound_links": [],
       "inbound_count": 3,
-      "processed_at": "2026-01-02T09:44:48.380437801+00:00"
-    },
-    {
-      "slug": "家庭菜園",
-      "title": "家庭菜園",
-      "content": "",
-      "metadata": {
-        "title": "家庭菜園",
-        "home_display": true,
-        "category": "",
-        "importance": 2,
-        "related_articles": [],
-        "tags": [],
-        "created_at": "2025-12-28T18:30:38Z",
-        "updated_at": "2025-12-29T00:52:32Z",
-        "author_image": null
-      },
-      "file_path": "articles/家庭菜園.md",
-      "outbound_links": [],
-      "inbound_count": 1,
-      "processed_at": "2026-01-02T09:44:48.380594001+00:00"
+      "processed_at": "2026-01-02T10:26:12.071309760+00:00"
     },
     {
       "slug": "hobby",
       "title": "趣味",
-      "content": "[[プログラミング]]\n[[Linux]]\n[[Neovim]]\n[[家庭菜園]]\n[[絵]]\n[[音楽]]",
+      "content": "[[programming]]\n[[Linux]]\n[[Neovim]]\n[[mini_farm|家庭菜園]]\n[[drawing|絵]]\n[[music|音楽]]\n",
       "metadata": {
         "title": "趣味",
         "home_display": true,
@@ -270,107 +305,72 @@
         "related_articles": [],
         "tags": [],
         "created_at": "2025-12-29T03:30:38Z",
-        "updated_at": "2026-01-02T17:53:17Z",
+        "updated_at": "2026-01-02T19:21:29Z",
         "author_image": null
       },
       "file_path": "articles/hobby.md",
       "outbound_links": [
         {
-          "target_slug": "プログラミング",
+          "target_slug": "programming",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
+          "context": "[[programming]] [[Linux]] [[Neovim]] [[mini_farm|家庭菜園]]",
           "position": 0,
-          "original_text": "[[プログラミング]]"
+          "original_text": "[[programming]]"
         },
         {
           "target_slug": "linux",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
+          "context": "[[programming]] [[Linux]] [[Neovim]] [[mini_farm|家庭菜園]] [[drawing|絵]]",
+          "position": 16,
+          "original_text": "[[Linux]]"
+        },
+        {
+          "target_slug": "neovim",
+          "link_type": "WikiLink",
+          "context": "[[programming]] [[Linux]] [[Neovim]] [[mini_farm|家庭菜園]] [[drawing|絵]] [[music|音楽]]",
           "position": 26,
-          "original_text": "[[Linux]]"
-        },
-        {
-          "target_slug": "neovim",
-          "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
-          "position": 36,
           "original_text": "[[Neovim]]"
         },
         {
-          "target_slug": "家庭菜園",
+          "target_slug": "mini_farm",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
-          "position": 47,
-          "original_text": "[[家庭菜園]]"
+          "context": "[[programming]] [[Linux]] [[Neovim]] [[mini_farm|家庭菜園]] [[drawing|絵]] [[music|音楽]]",
+          "position": 37,
+          "original_text": "[[mini_farm|家庭菜園]]"
         },
         {
-          "target_slug": "絵",
+          "target_slug": "drawing",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
+          "context": "[[programming]] [[Linux]] [[Neovim]] [[mini_farm|家庭菜園]] [[drawing|絵]] [[music|音楽]]",
           "position": 64,
-          "original_text": "[[絵]]"
+          "original_text": "[[drawing|絵]]"
         },
         {
-          "target_slug": "音楽",
+          "target_slug": "music",
           "link_type": "WikiLink",
-          "context": "[[プログラミング]] [[Linux]] [[Neovim]] [[家庭菜園]] [[絵]] [[音楽]]",
-          "position": 72,
-          "original_text": "[[音楽]]"
+          "context": "[[Linux]] [[Neovim]] [[mini_farm|家庭菜園]] [[drawing|絵]] [[music|音楽]]",
+          "position": 80,
+          "original_text": "[[music|音楽]]"
         }
       ],
       "inbound_count": 1,
-      "processed_at": "2026-01-02T09:44:48.382101026+00:00"
-    },
-    {
-      "slug": "プログラミング",
-      "title": "プログラミング",
-      "content": "[[Linux]]\n[[Neovim]]",
-      "metadata": {
-        "title": "プログラミング",
-        "home_display": true,
-        "category": "",
-        "importance": 2,
-        "related_articles": [],
-        "tags": [],
-        "created_at": "2025-12-28T18:30:38Z",
-        "updated_at": "2026-01-02T18:00:11Z",
-        "author_image": null
-      },
-      "file_path": "articles/プログラミング.md",
-      "outbound_links": [
-        {
-          "target_slug": "linux",
-          "link_type": "WikiLink",
-          "context": "[[Linux]] [[Neovim]]",
-          "position": 0,
-          "original_text": "[[Linux]]"
-        },
-        {
-          "target_slug": "neovim",
-          "link_type": "WikiLink",
-          "context": "[[Linux]] [[Neovim]]",
-          "position": 10,
-          "original_text": "[[Neovim]]"
-        }
-      ],
-      "inbound_count": 1,
-      "processed_at": "2026-01-02T09:44:48.382900226+00:00"
+      "processed_at": "2026-01-02T10:26:12.072895514+00:00"
     }
   ],
-  "generated_at": "2026-01-02T09:44:48.383046675+00:00",
+  "generated_at": "2026-01-02T10:26:12.073104104+00:00",
   "total_count": 12,
   "home_articles": [
+    "music",
     "neovim",
     "myworks",
+    "mini_farm",
     "linux",
+    "drawing",
     "gakuchika",
-    "音楽",
     "about-khimoo",
     "math",
-    "絵",
+    "programming",
     "continuum_theory",
-    "家庭菜園",
-    "hobby",
-    "プログラミング"
+    "hobby"
   ]
 }

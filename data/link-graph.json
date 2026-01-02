@@ -1,8 +1,64 @@
 {
   "graph": {
-    "continuum_theory": {
+    "neovim": {
       "connections": [],
-      "inbound_count": 3,
+      "inbound_count": 2,
+      "outbound_count": 0
+    },
+    "drawing": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
+    },
+    "gakuchika": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
+    },
+    "linux": {
+      "connections": [],
+      "inbound_count": 2,
+      "outbound_count": 0
+    },
+    "about-khimoo": {
+      "connections": [
+        {
+          "target": "math",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "continuum_theory",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 2
+        },
+        {
+          "target": "gakuchika",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "myworks",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "hobby",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        }
+      ],
+      "inbound_count": 0,
+      "outbound_count": 7
+    },
+    "music": {
+      "connections": [],
+      "inbound_count": 1,
       "outbound_count": 0
     },
     "myworks": {
@@ -10,7 +66,7 @@
       "inbound_count": 1,
       "outbound_count": 0
     },
-    "プログラミング": {
+    "programming": {
       "connections": [
         {
           "target": "linux",
@@ -28,17 +84,12 @@
       "inbound_count": 1,
       "outbound_count": 2
     },
-    "linux": {
+    "continuum_theory": {
       "connections": [],
-      "inbound_count": 2,
+      "inbound_count": 3,
       "outbound_count": 0
     },
-    "音楽": {
-      "connections": [],
-      "inbound_count": 1,
-      "outbound_count": 0
-    },
-    "gakuchika": {
+    "mini_farm": {
       "connections": [],
       "inbound_count": 1,
       "outbound_count": 0
@@ -46,7 +97,25 @@
     "hobby": {
       "connections": [
         {
-          "target": "neovim",
+          "target": "drawing",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "music",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "programming",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "mini_farm",
           "connection_type": "DirectLink",
           "bidirectional": false,
           "link_count": 1
@@ -58,25 +127,7 @@
           "link_count": 1
         },
         {
-          "target": "プログラミング",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "家庭菜園",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "絵",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "音楽",
+          "target": "neovim",
           "connection_type": "DirectLink",
           "bidirectional": false,
           "link_count": 1
@@ -96,60 +147,9 @@
       ],
       "inbound_count": 1,
       "outbound_count": 1
-    },
-    "家庭菜園": {
-      "connections": [],
-      "inbound_count": 1,
-      "outbound_count": 0
-    },
-    "about-khimoo": {
-      "connections": [
-        {
-          "target": "math",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "continuum_theory",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 2
-        },
-        {
-          "target": "hobby",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "gakuchika",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "myworks",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        }
-      ],
-      "inbound_count": 0,
-      "outbound_count": 7
-    },
-    "neovim": {
-      "connections": [],
-      "inbound_count": 2,
-      "outbound_count": 0
-    },
-    "絵": {
-      "connections": [],
-      "inbound_count": 1,
-      "outbound_count": 0
     }
   },
-  "generated_at": "2026-01-02T09:44:53.392368066+00:00",
+  "generated_at": "2026-01-02T10:26:17.548847232+00:00",
   "total_connections": 14,
   "bidirectional_pairs": 0,
   "direct_links": 14
