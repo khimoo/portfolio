@@ -1,5 +1,5 @@
 # Interactive Mindmap Portfolio - Task Runner
-# 
+#
 # This justfile provides organized recipes for development, building, and CI/CD operations.
 # Run 'just --list' to see all available commands organized by category.
 
@@ -7,28 +7,26 @@
 default:
     @just --list
 
-# === DEVELOPMENT RECIPES ===
+# === DEVELOPMENT ===
 
-# Start complete development environment with article processing and live server
+# One-command dev: debug trunk serve + watchers that run CI-like steps on changes
 dev:
-    @echo "🚀 Starting development environment..."
-    @just process-articles
-    @cd khimoo-portfolio && trunk serve
+	@echo "🚀 Starting dev: debug trunk serve + watchers (press Ctrl+C to stop all)..."
+	@./scripts/dev.sh
 
-# Start development server with hot reload (requires pre-built data)
-serve: build-data
-    @echo "🌐 Starting development server..."
-    @trunk serve --open
+# Run the CI-like pipeline but with dev (non-release) wasm build
+dev-rebuild: ci-optimize-images ci-process-articles generate-link-graph _copy-assets _dev-build-wasm _verify-build
+	@echo "🎯 dev-rebuild complete"
 
-# Watch articles directory and rebuild data on changes
-watch:
-    @echo "👀 Watching articles for changes..."
-    @watchexec -w articles -e md -- just build-data
+# Small helper: build wasm in dev (no --release) to keep quick feedback during dev
+_dev-build-wasm:
+	@echo "🔧 Building WebAssembly (debug) for dev..."
+	@cd khimoo-portfolio && trunk build --public-url /portfolio-page/
+	@echo "✅ dev wasm build finished"
 
-# Complete development workflow: format, lint, test, build data, and serve
-full-dev: fmt clippy test build-data
-    @echo "🎯 Full development check complete"
-    @trunk serve
+# Optional convenience: run only data pipeline (images + articles + link graph) without wasm
+dev-data-only: ci-optimize-images ci-process-articles generate-link-graph _copy-assets
+	@echo "✅ Data pipeline complete (no wasm build)"
 
 # === DATA PROCESSING RECIPES ===
 
@@ -82,7 +80,7 @@ clean:
 # === CI/CD RECIPES ===
 
 # Verify CI environment and display tool versions and configuration
-ci-setup:
+ci-verify-setup:
     @echo "🔧 Setting up CI environment..."
     @echo "Verifying required tools are available:"
     @echo "✅ Nix: $(nix --version 2>/dev/null || echo 'NOT FOUND')"
@@ -100,7 +98,7 @@ ci-setup:
 # Optimize images using Python script with comprehensive verification
 ci-optimize-images:
     @echo "🖼️ Optimizing images..."
-    @python3 optimize_images.py
+    @python3 scripts/optimize_images.py
     @just _verify-images
     @echo "🎯 Image optimization complete"
 
@@ -351,3 +349,12 @@ _verify-all-artifacts:
     @echo ""
     @echo "📁 Deployment artifacts:"
     @just _verify-deployment | grep -E "(✅|❌|⚠️)" | sed 's/^/  /'
+
+# === 内部用: Watcherから呼び出されるレシピ ===
+
+# Articles変更時に実行: データ再構築 -> index.htmlの更新(reloadトリガー)
+_on-article-change:
+    @echo "[watcher:articles] change detected: running pipeline..."
+    @just dev-data-only
+    @# index.htmlをtouchすることでtrunk serveにリロードさせる
+    @touch khimoo-portfolio/index.html
