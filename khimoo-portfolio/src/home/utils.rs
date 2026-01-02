@@ -14,5 +14,6 @@ pub fn resolve_image_path(image_path: &str) -> String {
     } else {
         // Local development environment - use root path (same as articles)
         image_path.to_string()
+        // format!("/img/author_img.png")
     }
 }

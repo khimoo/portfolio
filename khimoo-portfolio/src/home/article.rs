@@ -395,7 +395,7 @@ pub fn article_view(props: &ArticleViewProps) -> Html {
                                             <img
                                                 src={resolved_image_path}
                                                 alt="Author image"
-                                                style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #66b3ff;"
+                                                style="object-fit: cover;"
                                             />
                                         </div>
                                     }
