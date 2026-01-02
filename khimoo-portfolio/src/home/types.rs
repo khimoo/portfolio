@@ -33,9 +33,9 @@ impl Default for ForceSettings {
         Self {
             repulsion_strength: 68000.0,
             repulsion_min_distance: 150.0,
-            author_repulsion_min_distance: 200.0,  // 作者ノードは他のノードより大きな最小距離
+            author_repulsion_min_distance: 150.0,
             link_strength: 5000.0,
-            center_strength: 600.0,
+            center_strength: 6000.0,
             center_damping: 5.0,
             // Author node defaults
             // author_attraction_strength: 5000.0,
@@ -360,6 +360,14 @@ impl NodeRegistry {
         self.radii.insert(node_id, new_radius);
     }
 
+    pub fn get_node_importance(&self, node_id: NodeId) -> Option<u8> {
+        self.node_importance.get(&node_id).copied()
+    }
+
+    pub fn set_node_importance(&mut self, node_id: NodeId, importance: u8) {
+        self.node_importance.insert(node_id, importance);
+    }
+
     pub fn calculate_dynamic_radius(&self, node_id: NodeId, importance: Option<u8>, inbound_count: usize) -> i32 {
         let base_size = if self.is_author_node(node_id) {
             60 // Author node is always larger
@@ -400,19 +408,23 @@ impl NodeRegistry {
         self.edges.iter()
     }
 
-    pub fn set_node_importance(&mut self, node_id: NodeId, importance: u8) {
-        self.node_importance.insert(node_id, importance);
-    }
-
-    pub fn get_node_importance(&self, node_id: NodeId) -> Option<u8> {
-        self.node_importance.get(&node_id).copied()
+    pub fn get_node_inbound_count(&self, node_id: NodeId) -> usize {
+        self.node_inbound_counts.get(&node_id).copied().unwrap_or(0)
     }
 
     pub fn set_node_inbound_count(&mut self, node_id: NodeId, count: usize) {
         self.node_inbound_counts.insert(node_id, count);
     }
 
-    pub fn get_node_inbound_count(&self, node_id: NodeId) -> usize {
-        self.node_inbound_counts.get(&node_id).copied().unwrap_or(0)
+    // 物理判定用のサイズを計算する関数
+    pub fn calculate_physics_radius(&self, node_id: NodeId) -> f32 {
+        let visual_radius = self.radii.get(&node_id).copied().unwrap_or(30);
+        let importance = self.get_node_importance(node_id);
+
+        if let Some(5) = importance {
+            visual_radius as f32 * 2.1
+        } else {
+            visual_radius as f32
+        }
     }
 }

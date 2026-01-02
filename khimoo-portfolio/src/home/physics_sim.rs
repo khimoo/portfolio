@@ -73,8 +73,6 @@ impl PhysicsWorld {
         let mut edge_joint_handles = Vec::new();
 
         for (id, pos) in &registry.positions {
-            let radius = registry.radii.get(id).copied().unwrap_or(30);
-
             // 全てのノードを動的剛体として作成
             let rigid_body = RigidBodyBuilder::dynamic()
                 .linear_damping(3.0) // 統一された減衰
@@ -83,8 +81,10 @@ impl PhysicsWorld {
                 .build();
             let handle = bodies.insert(rigid_body);
 
-            // コライダーの追加
-            let collider = ColliderBuilder::ball(radius as f32)
+            // コライダーの追加（NodeRegistryで計算された物理判定サイズを使用）
+            let physics_radius = registry.calculate_physics_radius(*id);
+            
+            let collider = ColliderBuilder::ball(physics_radius)
                 .restitution(0.7) // 統一された反発係数
                 .build();
             colliders.insert_with_parent(collider, handle, &mut bodies);
@@ -468,13 +468,18 @@ impl PhysicsWorld {
                     true,
                 );
 
-                // Create new collider with updated radius
+                // Create new collider with updated radius（NodeRegistryで計算された物理判定サイズを使用）
                 let is_author = {
                     let registry = self.node_registry.borrow();
                     registry.is_author_node(node_id)
                 };
+                
+                let physics_radius = {
+                    let registry = self.node_registry.borrow();
+                    registry.calculate_physics_radius(node_id)
+                };
 
-                let collider = ColliderBuilder::ball(new_radius as f32)
+                let collider = ColliderBuilder::ball(physics_radius)
                     .restitution(if is_author { 0.3 } else { 0.7 })
                     .build();
                 self.colliders

@@ -747,10 +747,10 @@ fn calculate_dynamic_radius(base_radius: i32, importance: Option<u8>, inbound_co
     if let Some(imp) = importance {
         let importance_bonus = match imp {
             1 => -5, // 小さく
-            2 => -2,
+            2 => -3,
             3 => 0,  // ベースサイズ
             4 => 5,  // 大きく
-            5 => 40, // 最大
+            5 => 40, // 作者ノード
             _ => 0,
         };
         size += importance_bonus;
