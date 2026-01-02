@@ -5,9 +5,9 @@
       "inbound_count": 1,
       "outbound_count": 0
     },
-    "gakuchika": {
+    "myworks": {
       "connections": [],
-      "inbound_count": 0,
+      "inbound_count": 1,
       "outbound_count": 0
     },
     "linux": {
@@ -15,49 +15,9 @@
       "inbound_count": 2,
       "outbound_count": 0
     },
-    "about-khimoo": {
-      "connections": [
-        {
-          "target": "math",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 2
-        },
-        {
-          "target": "myworks",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "hobby",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "continuum_theory",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        }
-      ],
+    "gakuchika": {
+      "connections": [],
       "inbound_count": 0,
-      "outbound_count": 5
-    },
-    "myworks": {
-      "connections": [],
-      "inbound_count": 1,
-      "outbound_count": 0
-    },
-    "neovim": {
-      "connections": [],
-      "inbound_count": 2,
-      "outbound_count": 0
-    },
-    "drawing": {
-      "connections": [],
-      "inbound_count": 1,
       "outbound_count": 0
     },
     "continuum_theory": {
@@ -65,27 +25,10 @@
       "inbound_count": 2,
       "outbound_count": 0
     },
-    "music": {
-      "connections": [],
-      "inbound_count": 1,
-      "outbound_count": 0
-    },
     "hobby": {
       "connections": [
         {
-          "target": "linux",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "programming",
-          "connection_type": "DirectLink",
-          "bidirectional": false,
-          "link_count": 1
-        },
-        {
-          "target": "mini_farm",
+          "target": "music",
           "connection_type": "DirectLink",
           "bidirectional": false,
           "link_count": 1
@@ -97,7 +40,7 @@
           "link_count": 1
         },
         {
-          "target": "music",
+          "target": "programming",
           "connection_type": "DirectLink",
           "bidirectional": false,
           "link_count": 1
@@ -107,10 +50,44 @@
           "connection_type": "DirectLink",
           "bidirectional": false,
           "link_count": 1
+        },
+        {
+          "target": "mini_farm",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "linux",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
         }
       ],
       "inbound_count": 1,
       "outbound_count": 6
+    },
+    "drawing": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
+    },
+    "music": {
+      "connections": [],
+      "inbound_count": 1,
+      "outbound_count": 0
+    },
+    "math": {
+      "connections": [
+        {
+          "target": "continuum_theory",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        }
+      ],
+      "inbound_count": 2,
+      "outbound_count": 1
     },
     "programming": {
       "connections": [
@@ -130,20 +107,43 @@
       "inbound_count": 1,
       "outbound_count": 2
     },
-    "math": {
+    "neovim": {
+      "connections": [],
+      "inbound_count": 2,
+      "outbound_count": 0
+    },
+    "about-khimoo": {
       "connections": [
+        {
+          "target": "math",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 2
+        },
         {
           "target": "continuum_theory",
           "connection_type": "DirectLink",
           "bidirectional": false,
           "link_count": 1
+        },
+        {
+          "target": "myworks",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
+        },
+        {
+          "target": "hobby",
+          "connection_type": "DirectLink",
+          "bidirectional": false,
+          "link_count": 1
         }
       ],
-      "inbound_count": 2,
-      "outbound_count": 1
+      "inbound_count": 0,
+      "outbound_count": 5
     }
   },
-  "generated_at": "2026-01-02T15:23:04.910806558+00:00",
+  "generated_at": "2026-01-02T15:38:35.097284780+00:00",
   "total_connections": 13,
   "bidirectional_pairs": 0,
   "direct_links": 13
