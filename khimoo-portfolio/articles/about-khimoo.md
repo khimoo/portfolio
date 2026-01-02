@@ -2,11 +2,11 @@
 title: 自己紹介
 author_image: /articles/img/author_img.png
 home_display: true
-importance: 2
+importance: 5
 category: ""
 tags: []
-created_at: "2024-01-01T18:00:00Z"
-updated_at: "2026-01-02T15:47:33Z"
+created_at: "2024-01-02T03:00:00Z"
+updated_at: "2026-01-02T17:52:00Z"
 ---
 # プロフィール
 日比野 文です。
@@ -26,7 +26,7 @@ updated_at: "2026-01-02T15:47:33Z"
 人間によって課題(ワルシャワサークル、メンガーのスポンジなど)を用意し、人間によってそれを調査します。
 理論の整備をするよりも問題を解くことの方が多いのは数学にしてはめずらしいのかなと思います。
 ## 趣味
-絵、音楽などの芸術分野と、さ；さ；ふぁ；sdjaslfdsafdsjaklfdja;fa;
+絵、音楽などの芸術分野と、 
 [[hobby|趣味]]
 [[gakuchika|ガクチカ]]
 [[myworks|個人開発]]

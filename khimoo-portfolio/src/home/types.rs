@@ -7,20 +7,21 @@ use super::routes::Route;
 pub struct ForceSettings {
     pub repulsion_strength: f32,
     pub repulsion_min_distance: f32,
+    pub author_repulsion_min_distance: f32,  // 作者ノード専用の反発力最小距離
     pub link_strength: f32,
     pub center_strength: f32,
     pub center_damping: f32,
     // Author node specific settings
-    pub author_attraction_strength: f32,
-    pub author_attraction_damping: f32,
+    // pub author_attraction_strength: f32,  // 未使用
+    // pub author_attraction_damping: f32,   // 未使用
     // Direct link specific settings
     pub direct_link_strength: f32,
     pub direct_link_damping: f32,
-    pub bidirectional_link_multiplier: f32,
+    // pub bidirectional_link_multiplier: f32,  // 未使用
     // Debug mode settings
     pub debug_mode: bool,
     pub show_connection_lines: bool,
-    pub connection_line_opacity: f32,
+    // pub connection_line_opacity: f32,  // 未使用
     // Category-based clustering settings
     pub category_attraction_strength: f32,
     pub category_attraction_range: f32,
@@ -32,20 +33,21 @@ impl Default for ForceSettings {
         Self {
             repulsion_strength: 68000.0,
             repulsion_min_distance: 150.0,
+            author_repulsion_min_distance: 200.0,  // 作者ノードは他のノードより大きな最小距離
             link_strength: 5000.0,
-            center_strength: 6000.0,
+            center_strength: 600.0,
             center_damping: 5.0,
             // Author node defaults
-            author_attraction_strength: 2000.0,
-            author_attraction_damping: 8.0,
+            // author_attraction_strength: 5000.0,
+            // author_attraction_damping: 8.0,
             // Direct link defaults
             direct_link_strength: 8000.0,
             direct_link_damping: 300.0,
-            bidirectional_link_multiplier: 1.5,
+            // bidirectional_link_multiplier: 1.5,
             // Debug mode defaults
             debug_mode: false,
             show_connection_lines: true,
-            connection_line_opacity: 0.6,
+            // connection_line_opacity: 0.6,
             // Category clustering defaults
             category_attraction_strength: 1500.0,
             category_attraction_range: 300.0,

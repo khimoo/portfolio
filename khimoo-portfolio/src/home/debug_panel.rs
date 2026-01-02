@@ -29,6 +29,18 @@ pub mod debug_panel {
             })
         };
 
+        let on_author_repulsion_distance_change = {
+            let on_force_change = props.on_force_change.clone();
+            let force_settings = force_settings.clone();
+            Callback::from(move |e: Event| {
+                let value = e.target_unchecked_into::<web_sys::HtmlInputElement>()
+                    .value().parse().unwrap_or(200.0);
+                let mut new_settings = force_settings.clone();
+                new_settings.author_repulsion_min_distance = value;
+                on_force_change.emit(new_settings);
+            })
+        };
+
         let on_link_strength_change = {
             let on_force_change = props.on_force_change.clone();
             let force_settings = force_settings.clone();
@@ -107,6 +119,22 @@ pub mod debug_panel {
                         step="1000"
                         value={force_settings.repulsion_strength.to_string()}
                         onchange={on_repulsion_change}
+                        style="width: 100%;"
+                    />
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">
+                        {"Author Repulsion Distance: "}
+                        <span style="color: #FFC107;">{format!("{:.0}", force_settings.author_repulsion_min_distance)}</span>
+                    </label>
+                    <input 
+                        type="range" 
+                        min="50" 
+                        max="500" 
+                        step="10"
+                        value={force_settings.author_repulsion_min_distance.to_string()}
+                        onchange={on_author_repulsion_distance_change}
                         style="width: 100%;"
                     />
                 </div>

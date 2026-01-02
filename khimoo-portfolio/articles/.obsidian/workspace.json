@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "about-khimoo.md",
+                "file": "プログラミング.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "about-khimoo"
+              "title": "プログラミング"
             }
           }
         ]
@@ -186,6 +186,9 @@
   },
   "active": "12e1fb2632b2fdcf",
   "lastOpenFiles": [
+    "hobby.md",
+    "gakuchika.md",
+    "about-khimoo.md",
     "about-khimoo.md~",
     "img/author_img_small.webp",
     "img/author_img_small.png",
@@ -193,10 +196,7 @@
     "continuum_theory.md",
     "絵.md",
     "音楽.md",
-    "gakuchika.md",
-    "about-khimoo.md",
     "math.md",
-    "hobby.md",
     "Linux.md",
     "myworks.md",
     "無題のファイル.base",

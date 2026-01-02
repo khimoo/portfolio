@@ -169,7 +169,15 @@ impl PhysicsWorld {
 
                 let radius1 = registry.radii.get(id1).copied().unwrap_or(30) as f32;
                 let radius2 = registry.radii.get(id2).copied().unwrap_or(30) as f32;
-                let min_distance = radius1 + radius2 + self.force_settings.repulsion_min_distance; // 最小距離（半径 + 余白）
+                
+                // 作者ノードが関わる場合は専用の最小距離を使用
+                let base_min_distance = if registry.is_author_node(*id1) || registry.is_author_node(*id2) {
+                    self.force_settings.author_repulsion_min_distance
+                } else {
+                    self.force_settings.repulsion_min_distance
+                };
+                
+                let min_distance = radius1 + radius2 + base_min_distance; // 最小距離（半径 + 余白）
 
                 if distance < min_distance {
                     // 反発力の強さ（距離が近いほど強い）

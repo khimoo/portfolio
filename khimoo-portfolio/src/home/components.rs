@@ -414,6 +414,20 @@ pub fn node_graph_container(props: &NodeGraphContainerProps) -> Html {
         })
     };
 
+    let on_author_repulsion_distance_change = {
+        let force_settings = force_settings.clone();
+        Callback::from(move |e: Event| {
+            let target = e
+                .target()
+                .unwrap()
+                .unchecked_into::<web_sys::HtmlInputElement>();
+            let value = target.value().parse::<f32>().unwrap_or(200.0);
+            let mut settings = *force_settings;
+            settings.author_repulsion_min_distance = value;
+            force_settings.set(settings);
+        })
+    };
+
     let on_link_strength_change = {
         let force_settings = force_settings.clone();
         Callback::from(move |e: Event| {
@@ -552,6 +566,18 @@ pub fn node_graph_container(props: &NodeGraphContainerProps) -> Html {
                                         step="5"
                                         value={force_settings.repulsion_min_distance.to_string()}
                                         onchange={on_repulsion_distance_change.clone()}
+                                        style="width: 200px;"
+                                    />
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <label>{"作者ノード反発距離: "}{force_settings.author_repulsion_min_distance as i32}</label><br/>
+                                    <input
+                                        type="range"
+                                        min="50"
+                                        max="500"
+                                        step="10"
+                                        value={force_settings.author_repulsion_min_distance.to_string()}
+                                        onchange={on_author_repulsion_distance_change.clone()}
                                         style="width: 200px;"
                                     />
                                 </div>
