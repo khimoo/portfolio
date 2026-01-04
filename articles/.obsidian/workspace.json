@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "a0dee7b194dcf23a",
+    "id": "02f1fe0b8778726b",
     "type": "split",
     "children": [
       {
-        "id": "400b84e860f119da",
+        "id": "38fca810e9f9e8ce",
         "type": "tabs",
         "children": [
           {
-            "id": "12e1fb2632b2fdcf",
+            "id": "db48dff8e671f506",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "myworks.md",
+                "file": "myblog.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "myworks"
+              "title": "myblog"
             }
           }
         ]
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "2bf19c267380f69a",
+    "id": "b61bce38ae0aa9c7",
     "type": "split",
     "children": [
       {
-        "id": "07c39179341d891c",
+        "id": "b3a116ec60a6e41b",
         "type": "tabs",
         "children": [
           {
-            "id": "557c281a29a75c70",
+            "id": "e8645d5b0c9292d9",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +48,7 @@
             }
           },
           {
-            "id": "0390f28ad73cb440",
+            "id": "82bb9fffeb640288",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +65,7 @@
             }
           },
           {
-            "id": "67139576c3de369a",
+            "id": "220e2488deee0c18",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -81,20 +81,20 @@
     "width": 300
   },
   "right": {
-    "id": "20a4da7c8a8745e6",
+    "id": "98fc6393dff71aa9",
     "type": "split",
     "children": [
       {
-        "id": "266ee92176d35fac",
+        "id": "04231c837bf81f40",
         "type": "tabs",
         "children": [
           {
-            "id": "2eba9723a9611b4b",
+            "id": "7c360b533d56359c",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "数学.md",
+                "file": "about-khimoo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,25 +104,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "数学へのバックリンク"
+              "title": "about-khimooへのバックリンク"
             }
           },
           {
-            "id": "7f8dfbede99937dd",
+            "id": "fe49dd954ea19e12",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "数学.md",
+                "file": "about-khimoo.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "数学からのアウトゴーイングリンク"
+              "title": "about-khimooからのアウトゴーイングリンク"
             }
           },
           {
-            "id": "686fa49fd1887f65",
+            "id": "7280d9b173395b8a",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -137,7 +137,7 @@
             }
           },
           {
-            "id": "382dcfd50a57e428",
+            "id": "0998a05588f5c443",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -151,22 +151,21 @@
             }
           },
           {
-            "id": "713e3e3ab4a47073",
+            "id": "5bc2c1637f8382d5",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "数学.md",
+                "file": "about-khimoo.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "数学のアウトライン"
+              "title": "about-khimooのアウトライン"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
@@ -179,44 +178,17 @@
       "graph:グラフビューを開く": false,
       "canvas:新規キャンバスを作成": false,
       "daily-notes:今日のデイリーノートを開く": false,
+      "templates:テンプレートを挿入": false,
       "command-palette:コマンドパレットを開く": false,
       "bases:Create new base": false,
       "templater-obsidian:Templater": false
     }
   },
-  "active": "12e1fb2632b2fdcf",
+  "active": "db48dff8e671f506",
   "lastOpenFiles": [
-    "about-khimoo.md",
     "myworks.md",
-    "myblog.md",
+    "about-khimoo.md",
     "continuum_theory.md",
-    "gakuchika.md",
-    "hobby.md",
-    "programming.md",
-    "about-khimoo.md~",
-    "img/author_img_small.webp",
-    "img/author_img_small.png",
-    "img/author_img_medium.png",
-    "drawing.md",
-    "music.md",
-    "math.md",
-    "Linux.md",
-    "無題のファイル.base",
-    "mini_farm.md",
-    "Neovim.md",
-    "test.md",
-    "Templates/template_article.md",
-    "2025-12-29.md",
-    "testa.md",
-    "README.md",
-    "Templates",
-    "web-development.md",
-    "tokio-basics.md",
-    "rust-async.md",
-    "hello.md",
-    "broken-link-test.md",
-    "async-patterns.md",
-    "asdfa.md",
-    "img/author_img.png"
+    "Templates/template_article.md"
   ]
 }

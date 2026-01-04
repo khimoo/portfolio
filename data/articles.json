@@ -14,7 +14,7 @@
         "updated_at": "2025-12-29T00:52:22Z",
         "author_image": null
       },
-      "file_path": "articles/music.md",
+      "file_path": "../content/articles/music.md",
       "outbound_links": [],
       "inbound_links": [
         {
@@ -23,7 +23,7 @@
           "original_text": "[[music|音楽]]"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.008163749+00:00"
+      "processed_at": "2026-01-04T07:21:56.327754093+00:00"
     },
     {
       "slug": "neovim",
@@ -39,7 +39,7 @@
         "updated_at": "2025-12-29T00:51:53Z",
         "author_image": null
       },
-      "file_path": "articles/Neovim.md",
+      "file_path": "../content/articles/Neovim.md",
       "outbound_links": [],
       "inbound_links": [
         {
@@ -53,7 +53,7 @@
           "original_text": "[[Neovim]]"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.008406255+00:00"
+      "processed_at": "2026-01-04T07:21:56.327970444+00:00"
     },
     {
       "slug": "myworks",
@@ -69,7 +69,7 @@
         "updated_at": "2026-01-03T23:28:51Z",
         "author_image": null
       },
-      "file_path": "articles/myworks.md",
+      "file_path": "../content/articles/myworks.md",
       "outbound_links": [
         {
           "target_slug": "myblog",
@@ -84,7 +84,7 @@
           "original_text": "[個人開発の記事一覧](myworks)"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.009140639+00:00"
+      "processed_at": "2026-01-04T07:21:56.328600523+00:00"
     },
     {
       "slug": "mini_farm",
@@ -100,7 +100,7 @@
         "updated_at": "2025-12-29T00:52:32Z",
         "author_image": null
       },
-      "file_path": "articles/mini_farm.md",
+      "file_path": "../content/articles/mini_farm.md",
       "outbound_links": [],
       "inbound_links": [
         {
@@ -109,7 +109,7 @@
           "original_text": "[[mini_farm|家庭菜園]]"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.009349683+00:00"
+      "processed_at": "2026-01-04T07:21:56.328802548+00:00"
     },
     {
       "slug": "linux",
@@ -125,7 +125,7 @@
         "updated_at": "2025-12-29T00:51:46Z",
         "author_image": null
       },
-      "file_path": "articles/Linux.md",
+      "file_path": "../content/articles/Linux.md",
       "outbound_links": [],
       "inbound_links": [
         {
@@ -139,7 +139,7 @@
           "original_text": "[[Linux]]"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.009553947+00:00"
+      "processed_at": "2026-01-04T07:21:56.328969758+00:00"
     },
     {
       "slug": "drawing",
@@ -155,7 +155,7 @@
         "updated_at": "2025-12-29T00:52:41Z",
         "author_image": null
       },
-      "file_path": "articles/drawing.md",
+      "file_path": "../content/articles/drawing.md",
       "outbound_links": [],
       "inbound_links": [
         {
@@ -164,7 +164,7 @@
           "original_text": "[[drawing|絵]]"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.009783349+00:00"
+      "processed_at": "2026-01-04T07:21:56.329160753+00:00"
     },
     {
       "slug": "gakuchika",
@@ -180,7 +180,7 @@
         "updated_at": "2025-12-29T01:59:55Z",
         "author_image": null
       },
-      "file_path": "articles/gakuchika.md",
+      "file_path": "../content/articles/gakuchika.md",
       "outbound_links": [],
       "inbound_links": [
         {
@@ -189,7 +189,7 @@
           "original_text": "[こちら](gakuchika)"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.009975051+00:00"
+      "processed_at": "2026-01-04T07:21:56.329335607+00:00"
     },
     {
       "slug": "myblog",
@@ -201,11 +201,11 @@
         "importance": 2,
         "related_articles": [],
         "tags": [],
-        "created_at": null,
-        "updated_at": null,
+        "created_at": "2026-01-03T09:39:31Z",
+        "updated_at": "2026-01-04T03:27:24Z",
         "author_image": null
       },
-      "file_path": "articles/myblog.md",
+      "file_path": "../content/articles/myblog.md",
       "outbound_links": [],
       "inbound_links": [
         {
@@ -214,7 +214,7 @@
           "original_text": "[ブログ](myblog)"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.010201858+00:00"
+      "processed_at": "2026-01-04T07:21:56.329502276+00:00"
     },
     {
       "slug": "about-khimoo",
@@ -228,9 +228,9 @@
         "tags": [],
         "created_at": "2024-01-02T03:00:00Z",
         "updated_at": "2026-01-03T21:45:57Z",
-        "author_image": "/articles/img/author_img.png"
+        "author_image": "/assets/img/author_img.png"
       },
-      "file_path": "articles/about-khimoo.md",
+      "file_path": "../content/articles/about-khimoo.md",
       "outbound_links": [
         {
           "target_slug": "math",
@@ -264,7 +264,19 @@
         }
       ],
       "inbound_links": [],
-      "processed_at": "2026-01-04T05:42:00.010983570+00:00"
+      "processed_at": "2026-01-04T07:21:56.565981742+00:00",
+      "optimized_images": [
+        {
+          "original_path": "../content/assets/img/author_img.png",
+          "small_png_path": "../content/assets/img/author_img_small.png",
+          "small_webp_path": "../content/assets/img/author_img_small.webp",
+          "medium_png_path": "../content/assets/img/author_img_medium.png",
+          "original_size": 206297,
+          "small_png_size": 11699,
+          "small_webp_size": 11699,
+          "medium_png_size": 42164
+        }
+      ]
     },
     {
       "slug": "math",
@@ -280,7 +292,7 @@
         "updated_at": "2025-12-29T00:53:06Z",
         "author_image": null
       },
-      "file_path": "articles/math.md",
+      "file_path": "../content/articles/math.md",
       "outbound_links": [
         {
           "target_slug": "continuum_theory",
@@ -300,7 +312,7 @@
           "original_text": "[数学](math)"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.011694320+00:00"
+      "processed_at": "2026-01-04T07:21:56.566775245+00:00"
     },
     {
       "slug": "programming",
@@ -316,7 +328,7 @@
         "updated_at": "2026-01-02T18:00:11Z",
         "author_image": null
       },
-      "file_path": "articles/programming.md",
+      "file_path": "../content/articles/programming.md",
       "outbound_links": [
         {
           "target_slug": "linux",
@@ -336,7 +348,7 @@
           "original_text": "[[programming]]"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.012485210+00:00"
+      "processed_at": "2026-01-04T07:21:56.567435079+00:00"
     },
     {
       "slug": "continuum_theory",
@@ -352,7 +364,7 @@
         "updated_at": null,
         "author_image": null
       },
-      "file_path": "articles/continuum_theory.md",
+      "file_path": "../content/articles/continuum_theory.md",
       "outbound_links": [],
       "inbound_links": [
         {
@@ -366,7 +378,7 @@
           "original_text": "[[continuum_theory]]"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.012648938+00:00"
+      "processed_at": "2026-01-04T07:21:56.567603462+00:00"
     },
     {
       "slug": "hobby",
@@ -382,7 +394,7 @@
         "updated_at": "2026-01-02T19:21:29Z",
         "author_image": null
       },
-      "file_path": "articles/hobby.md",
+      "file_path": "../content/articles/hobby.md",
       "outbound_links": [
         {
           "target_slug": "programming",
@@ -422,10 +434,10 @@
           "original_text": "[趣味](hobby)"
         }
       ],
-      "processed_at": "2026-01-04T05:42:00.014405547+00:00"
+      "processed_at": "2026-01-04T07:21:56.569251820+00:00"
     }
   ],
-  "generated_at": "2026-01-04T05:42:00.014609631+00:00",
+  "generated_at": "2026-01-04T07:21:56.569450749+00:00",
   "total_count": 13,
   "home_articles": [
     "music",

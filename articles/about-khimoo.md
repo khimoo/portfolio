@@ -1,6 +1,6 @@
 ---
 title: 自己紹介
-author_image: /articles/img/author_img.png
+author_image: /assets/img/author_img.png
 home_display: true
 importance: 5
 category: ""
