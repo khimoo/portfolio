@@ -1,16 +1,17 @@
 pub mod home;
 pub mod config;
 
-// Only include article_processing for non-WASM targets
+// Only include articles module for non-WASM targets
 #[cfg(not(target_arch = "wasm32"))]
-pub mod article_processing;
+pub mod articles;
 
 // Re-export commonly used types (only for non-WASM)
 #[cfg(not(target_arch = "wasm32"))]
-pub use article_processing::{
+pub use articles::{
     ArticleMetadata, 
     ExtractedLink, 
     LinkType, 
     LinkExtractor,
-    FrontMatterParser
+    FrontMatterParser,
+    ArticleProcessor
 };

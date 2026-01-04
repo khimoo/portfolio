@@ -1,4 +1,4 @@
-use khimoo_portfolio::article_processing::{
+use khimoo_portfolio::articles::{
     FrontMatterParser, ArticleMetadata, LinkExtractor, ExtractedLink
 };
 use anyhow::{Context, Result};
@@ -188,8 +188,8 @@ impl ArticleProcessor {
                 for link in &outbound_links {
                     println!("      → {} ({})", link.target_slug, 
                         match link.link_type {
-                            khimoo_portfolio::LinkType::WikiLink => "wiki",
-                            khimoo_portfolio::LinkType::MarkdownLink => "markdown",
+                            khimoo_portfolio::articles::LinkType::WikiLink => "wiki",
+                            khimoo_portfolio::articles::LinkType::MarkdownLink => "markdown",
                         }
                     );
                 }
