@@ -68,8 +68,21 @@ impl AppConfig {
 
     /// Get article file URL
     pub fn article_url(&self, filepath: &str) -> String {
-        let clean_path = filepath.trim_start_matches("articles/").trim_start_matches('/');
-        self.get_url(&format!("articles/{}", clean_path))
+        // Remove any leading path components and keep only the filename
+        let clean_path = filepath.trim_start_matches('/');
+        
+        // Extract just the filename from paths like "../content/articles/about-khimoo.md"
+        let filename = if let Some(filename) = clean_path.split('/').last() {
+            filename
+        } else {
+            clean_path
+        };
+        
+        if self.base_path.is_empty() {
+            format!("/articles/{}", filename)
+        } else {
+            format!("{}/articles/{}", self.base_path, filename)
+        }
     }
 }
 
