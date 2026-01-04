@@ -6,14 +6,15 @@ use khimoo_portfolio::articles::{
     ArticleProcessor, LinkValidator
 };
 use khimoo_portfolio::articles::links::ValidationReportFormatter;
+use khimoo_portfolio::config_loader::get_default_articles_dir;
 
 #[derive(Parser)]
 #[command(name = "validate_links")]
 #[command(about = "Validate links in markdown articles")]
 struct Args {
     /// Directory containing markdown articles
-    #[arg(short, long, default_value = "articles")]
-    articles_dir: PathBuf,
+    #[arg(short, long)]
+    articles_dir: Option<PathBuf>,
     
     /// Output directory for validation reports
     #[arg(short, long, default_value = "validation_reports")]
@@ -27,14 +28,17 @@ struct Args {
 fn main() -> Result<()> {
     let args = Args::parse();
     
+    // Use configuration default if not provided
+    let articles_dir = args.articles_dir.unwrap_or_else(|| get_default_articles_dir());
+    
     // Initialize article processor
     let processor = ArticleProcessor::new()?;
     
     // Process all articles in the directory
     let mut processed_articles = Vec::new();
     
-    if args.articles_dir.exists() {
-        for entry in std::fs::read_dir(&args.articles_dir)? {
+    if articles_dir.exists() {
+        for entry in std::fs::read_dir(&articles_dir)? {
             let entry = entry?;
             let path = entry.path();
             

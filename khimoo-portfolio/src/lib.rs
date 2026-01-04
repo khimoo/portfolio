@@ -5,6 +5,10 @@ pub mod config;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod articles;
 
+// Only include config_loader for non-WASM targets
+#[cfg(not(target_arch = "wasm32"))]
+pub mod config_loader;
+
 // Re-export commonly used types (only for non-WASM)
 #[cfg(not(target_arch = "wasm32"))]
 pub use articles::{

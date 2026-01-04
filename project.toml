@@ -1,0 +1,28 @@
+# Project Configuration
+# This file centralizes all path configurations to follow DRY, ETC, and KISS principles
+
+[paths]
+# Content directories (relative to project root)
+articles_dir = "content/articles"
+assets_dir = "content/assets"
+images_dir = "content/assets/img"
+
+# Build directories (relative to project root)
+data_dir = "khimoo-portfolio/data"
+dist_dir = "khimoo-portfolio/dist"
+public_dir = "public"
+
+# Application directories (relative to project root)
+app_dir = "khimoo-portfolio"
+scripts_dir = "scripts"
+
+[build]
+# Build configuration
+debounce_ms = 300
+parallel_processing = true
+
+[optimization]
+# Image optimization settings
+webp_quality = 85
+small_image_size = 64
+medium_image_size = 128

@@ -3,6 +3,14 @@
 # This justfile provides organized recipes for development, building, and CI/CD operations.
 # Run 'just --list' to see all available commands organized by category.
 
+# === CONFIGURATION ===
+# Get configuration values from project.toml
+ARTICLES_DIR := `python3 scripts/config.py articles_dir --relative`
+ASSETS_DIR := `python3 scripts/config.py assets_dir --relative`
+IMAGES_DIR := `python3 scripts/config.py images_dir --relative`
+DATA_DIR := `python3 scripts/config.py data_dir --relative`
+APP_DIR := `python3 scripts/config.py app_dir --relative`
+
 # Show all available recipes with descriptions
 default:
     @just --list
@@ -21,7 +29,7 @@ dev-rebuild: ci-optimize-images ci-process-articles _copy-assets _dev-build-wasm
 # Small helper: build wasm in dev (no --release) to keep quick feedback during dev
 _dev-build-wasm:
 	@echo "🔧 Building WebAssembly (debug) for dev..."
-	@cd khimoo-portfolio && trunk build --public-url /
+	@cd {{APP_DIR}} && trunk build --public-url /
 	@echo "✅ dev wasm build finished"
 
 # Optional convenience: run only data pipeline (images + articles) without wasm
@@ -33,7 +41,7 @@ dev-data-only: ci-optimize-images ci-process-articles _copy-assets
 # Process markdown articles into JSON data structures
 process-articles:
     @echo "📝 Processing articles..."
-    @cd khimoo-portfolio && cargo run --bin process-articles --features cli-tools
+    @cd {{APP_DIR}} && cargo run --bin process-articles --features cli-tools -- --articles-dir ../{{ARTICLES_DIR}} --output-dir data
 
 # Validate internal and external links in articles
 validate-links:
@@ -49,7 +57,7 @@ build-data: process-articles validate-links
 # Build WebAssembly application for production deployment
 build: build-data
     @echo "🏗️  Building for production..."
-    @cd khimoo-portfolio && trunk build --release --public-url /portfolio-page/
+    @cd {{APP_DIR}} && trunk build --release --public-url /portfolio-page/
 
 # Run all tests: unit tests and WebAssembly browser tests
 test:
@@ -93,21 +101,21 @@ ci-verify-setup:
 # Optimize images using Python script with comprehensive verification
 ci-optimize-images:
     @echo "🖼️ Optimizing images..."
-    @python3 scripts/optimize_images.py
+    @python3 scripts/optimize_images.py --input-dir {{IMAGES_DIR}}
     @just _verify-images
     @echo "🎯 Image optimization complete"
 
 # Process articles with validation and comprehensive output verification
 ci-process-articles:
     @echo "📚 Processing articles..."
-    @cd khimoo-portfolio && cargo run --features cli-tools --bin process-articles -- --articles-dir articles --output-dir data --verbose
+    @cd {{APP_DIR}} && cargo run --features cli-tools --bin process-articles -- --articles-dir ../{{ARTICLES_DIR}} --output-dir data --verbose
     @just _verify-article-processing
     @echo "🎯 Article processing complete"
 
 # Build WebAssembly application with asset copying and verification
 ci-build-wasm:
     @echo "🚀 Building WebAssembly application..."
-    @cd khimoo-portfolio && trunk build --release --public-url /portfolio-page/
+    @cd {{APP_DIR}} && trunk build --release --public-url /portfolio-page/
     @just _copy-assets
     @just _verify-build
     @echo "🎯 WebAssembly build complete"
@@ -134,27 +142,27 @@ ci-verify:
 _verify-images:
     @echo "📊 Verifying image optimization..."
     @# Check for original PNG files
-    @if [ -f "khimoo-portfolio/articles/img/author_img.png" ]; then \
-        echo "✅ Original PNG found: $(ls -lh khimoo-portfolio/articles/img/author_img.png | awk '{print $5}')"; \
+    @if [ -f "{{IMAGES_DIR}}/author_img.png" ]; then \
+        echo "✅ Original PNG found: $(ls -lh {{IMAGES_DIR}}/author_img.png | awk '{print $5}')"; \
     else \
         echo "⚠️ Original PNG not found"; \
     fi
     @# Check for optimized WebP files
-    @if [ -f "khimoo-portfolio/articles/img/author_img.webp" ]; then \
-        echo "✅ Optimized WebP found: $(ls -lh khimoo-portfolio/articles/img/author_img.webp | awk '{print $5}')"; \
+    @if [ -f "{{IMAGES_DIR}}/author_img.webp" ]; then \
+        echo "✅ Optimized WebP found: $(ls -lh {{IMAGES_DIR}}/author_img.webp | awk '{print $5}')"; \
     else \
         echo "⚠️ Optimized WebP not found"; \
     fi
     @# Verify image directory exists and list all image files
-    @if [ -d "khimoo-portfolio/articles/img" ]; then \
+    @if [ -d "{{IMAGES_DIR}}" ]; then \
         echo "📁 Image directory contents:"; \
-        ls -lah khimoo-portfolio/articles/img/ | grep -E '\.(png|webp|jpg|jpeg|gif)$' || echo "  No image files found"; \
+        ls -lah {{IMAGES_DIR}}/ | grep -E '\.(png|webp|jpg|jpeg|gif)$' || echo "  No image files found"; \
     else \
         echo "❌ Image directory not found!" && exit 1; \
     fi
     @# Check file formats and sizes
     @for ext in png webp jpg jpeg; do \
-        for img in khimoo-portfolio/articles/img/*.$${ext}; do \
+        for img in {{IMAGES_DIR}}/*.$${ext}; do \
             if [ -f "$${img}" ]; then \
                 echo "🔍 $$(basename $${img}): $$(file $${img} | cut -d: -f2 | xargs) - $$(ls -lh $${img} | awk '{print $$5}')"; \
             fi; \
@@ -165,41 +173,41 @@ _verify-images:
 _verify-article-processing:
     @echo "🔍 Verifying article processing..."
     @# Check for articles.json
-    @if [ -f "khimoo-portfolio/data/articles.json" ]; then \
-        echo "✅ articles.json generated successfully: $(ls -lh khimoo-portfolio/data/articles.json | awk '{print $5}')"; \
-        echo "📄 Article count: $(cat khimoo-portfolio/data/articles.json | python3 -c "import sys, json; data=json.load(sys.stdin); print(len(data.get('articles', [])) if isinstance(data, dict) else len(data))" 2>/dev/null || echo "Unable to parse")"; \
+    @if [ -f "{{DATA_DIR}}/articles.json" ]; then \
+        echo "✅ articles.json generated successfully: $(ls -lh {{DATA_DIR}}/articles.json | awk '{print $5}')"; \
+        echo "📄 Article count: $(cat {{DATA_DIR}}/articles.json | python3 -c "import sys, json; data=json.load(sys.stdin); print(len(data.get('articles', [])) if isinstance(data, dict) else len(data))" 2>/dev/null || echo "Unable to parse")"; \
     else \
         echo "❌ articles.json not found!" && exit 1; \
     fi
     @# Check for validation report
-    @if [ -f "khimoo-portfolio/data/validation-report.json" ]; then \
-        echo "✅ validation-report.json found: $(ls -lh khimoo-portfolio/data/validation-report.json | awk '{print $5}')"; \
+    @if [ -f "{{DATA_DIR}}/validation-report.json" ]; then \
+        echo "✅ validation-report.json found: $(ls -lh {{DATA_DIR}}/validation-report.json | awk '{print $5}')"; \
     else \
         echo "⚠️ validation-report.json not found"; \
     fi
     @# Verify data directory structure
-    @if [ -d "khimoo-portfolio/data" ]; then \
+    @if [ -d "{{DATA_DIR}}" ]; then \
         echo "📁 Data directory contents:"; \
-        ls -lah khimoo-portfolio/data/; \
+        ls -lah {{DATA_DIR}}/; \
     else \
         echo "❌ Data directory not found!" && exit 1; \
     fi
     @# Validate JSON structure
-    @if [ -f "khimoo-portfolio/data/articles.json" ]; then \
+    @if [ -f "{{DATA_DIR}}/articles.json" ]; then \
         echo "🔍 Validating JSON structure..."; \
-        python3 -c "import json; json.load(open('khimoo-portfolio/data/articles.json')); print('✅ Valid JSON structure')" 2>/dev/null || echo "❌ Invalid JSON structure"; \
+        python3 -c "import json; json.load(open('{{DATA_DIR}}/articles.json')); print('✅ Valid JSON structure')" 2>/dev/null || echo "❌ Invalid JSON structure"; \
     fi
 
 # Copy assets to build directory including images and data files
 _copy-assets:
     @echo "📸 Copying assets..."
     @# Create target directories
-    @mkdir -p khimoo-portfolio/dist/articles/img
-    @mkdir -p khimoo-portfolio/dist/data
+    @mkdir -p {{APP_DIR}}/dist/articles/img
+    @mkdir -p {{APP_DIR}}/dist/data
     @# Copy image assets
-    @if [ -d "khimoo-portfolio/articles/img" ]; then \
-        if ls khimoo-portfolio/articles/img/* >/dev/null 2>&1; then \
-            cp -v khimoo-portfolio/articles/img/* khimoo-portfolio/dist/articles/img/ && \
+    @if [ -d "{{IMAGES_DIR}}" ]; then \
+        if ls {{IMAGES_DIR}}/* >/dev/null 2>&1; then \
+            cp -v {{IMAGES_DIR}}/* {{APP_DIR}}/dist/articles/img/ && \
             echo "✅ Images copied successfully"; \
         else \
             echo "⚠️ No images found to copy"; \
@@ -208,9 +216,9 @@ _copy-assets:
         echo "⚠️ Image source directory not found"; \
     fi
     @# Copy data files
-    @if [ -d "khimoo-portfolio/data" ]; then \
-        if ls khimoo-portfolio/data/*.json >/dev/null 2>&1; then \
-            cp -v khimoo-portfolio/data/*.json khimoo-portfolio/dist/data/ && \
+    @if [ -d "{{DATA_DIR}}" ]; then \
+        if ls {{DATA_DIR}}/*.json >/dev/null 2>&1; then \
+            cp -v {{DATA_DIR}}/*.json {{APP_DIR}}/dist/data/ && \
             echo "✅ Data files copied successfully"; \
         else \
             echo "⚠️ No data files found to copy"; \
@@ -220,46 +228,46 @@ _copy-assets:
     fi
     @# Verify copied assets
     @echo "🔍 Verifying copied assets:"
-    @if [ -d "khimoo-portfolio/dist/articles/img" ]; then \
-        echo "  📁 Images: $(ls khimoo-portfolio/dist/articles/img/ 2>/dev/null | wc -l) files"; \
+    @if [ -d "{{APP_DIR}}/dist/articles/img" ]; then \
+        echo "  📁 Images: $(ls {{APP_DIR}}/dist/articles/img/ 2>/dev/null | wc -l) files"; \
     fi
-    @if [ -d "khimoo-portfolio/dist/data" ]; then \
-        echo "  📁 Data: $(ls khimoo-portfolio/dist/data/ 2>/dev/null | wc -l) files"; \
+    @if [ -d "{{APP_DIR}}/dist/data" ]; then \
+        echo "  📁 Data: $(ls {{APP_DIR}}/dist/data/ 2>/dev/null | wc -l) files"; \
     fi
 
 # Verify build artifacts including WebAssembly and JavaScript files
 _verify-build:
     @echo "🔍 Verifying build artifacts..."
     @# Check dist directory exists
-    @if [ -d "khimoo-portfolio/dist" ]; then \
+    @if [ -d "{{APP_DIR}}/dist" ]; then \
         echo "✅ dist directory found"; \
-        echo "📁 Build size: $(du -sh khimoo-portfolio/dist | awk '{print $1}')"; \
+        echo "📁 Build size: $(du -sh {{APP_DIR}}/dist | awk '{print $1}')"; \
     else \
         echo "❌ dist directory not found!" && exit 1; \
     fi
     @# Check for essential files
-    @if [ -f "khimoo-portfolio/dist/index.html" ]; then \
-        echo "✅ index.html found: $(ls -lh khimoo-portfolio/dist/index.html | awk '{print $5}')"; \
+    @if [ -f "{{APP_DIR}}/dist/index.html" ]; then \
+        echo "✅ index.html found: $(ls -lh {{APP_DIR}}/dist/index.html | awk '{print $5}')"; \
     else \
         echo "❌ index.html not found!" && exit 1; \
     fi
     @# Check for WebAssembly files
-    @if ls khimoo-portfolio/dist/*.wasm >/dev/null 2>&1; then \
+    @if ls {{APP_DIR}}/dist/*.wasm >/dev/null 2>&1; then \
         echo "✅ WebAssembly files found:"; \
-        ls -lh khimoo-portfolio/dist/*.wasm | awk '{print "  " $9 ": " $5}'; \
+        ls -lh {{APP_DIR}}/dist/*.wasm | awk '{print "  " $9 ": " $5}'; \
     else \
         echo "❌ No WebAssembly files found!" && exit 1; \
     fi
     @# Check for JavaScript files
-    @if ls khimoo-portfolio/dist/*.js >/dev/null 2>&1; then \
+    @if ls {{APP_DIR}}/dist/*.js >/dev/null 2>&1; then \
         echo "✅ JavaScript files found:"; \
-        ls -lh khimoo-portfolio/dist/*.js | awk '{print "  " $9 ": " $5}'; \
+        ls -lh {{APP_DIR}}/dist/*.js | awk '{print "  " $9 ": " $5}'; \
     else \
         echo "⚠️ No JavaScript files found"; \
     fi
     @# List all files in dist
     @echo "📄 Complete dist directory structure:"; \
-    ls -lah khimoo-portfolio/dist/
+    ls -lah {{APP_DIR}}/dist/
 
 # Setup deployment directory structure
 _setup-deploy-dir:
@@ -272,15 +280,15 @@ _setup-deploy-dir:
 _copy-deployment-files:
     @echo "📋 Copying deployment files..."
     @# Copy dist contents to public
-    @if [ -d "khimoo-portfolio/dist" ]; then \
-        cp -r khimoo-portfolio/dist/* public/ && \
+    @if [ -d "{{APP_DIR}}/dist" ]; then \
+        cp -r {{APP_DIR}}/dist/* public/ && \
         echo "✅ Copied dist contents to public/"; \
     else \
         echo "❌ dist directory not found!" && exit 1; \
     fi
     @# Copy data contents to public/data
-    @if [ -d "khimoo-portfolio/data" ]; then \
-        cp -r khimoo-portfolio/data/* public/data/ && \
+    @if [ -d "{{DATA_DIR}}" ]; then \
+        cp -r {{DATA_DIR}}/* public/data/ && \
         echo "✅ Copied data contents to public/data/"; \
     else \
         echo "⚠️ data directory not found"; \

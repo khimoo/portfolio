@@ -1,6 +1,7 @@
 use khimoo_portfolio::articles::{
     FrontMatterParser, ArticleMetadata, LinkExtractor, ExtractedLink
 };
+use khimoo_portfolio::config_loader::get_default_articles_dir;
 use anyhow::{Context, Result};
 use clap::Parser;
 use serde::{Deserialize, Serialize};
@@ -14,8 +15,8 @@ use chrono::Utc;
 #[command(about = "Process articles and generate static data")]
 struct Args {
     /// Articles directory path
-    #[arg(short, long, default_value = "articles")]
-    articles_dir: PathBuf,
+    #[arg(short, long)]
+    articles_dir: Option<PathBuf>,
     
     /// Output directory for generated data
     #[arg(short, long, default_value = "data")]
@@ -52,13 +53,16 @@ pub struct ArticlesData {
 fn main() -> Result<()> {
     let args = Args::parse();
     
+    // Use configuration default if not provided
+    let articles_dir = args.articles_dir.unwrap_or_else(|| get_default_articles_dir());
+    
     if args.verbose {
-        println!("🔄 Processing articles from {:?}", args.articles_dir);
+        println!("🔄 Processing articles from {:?}", articles_dir);
         println!("📁 Output directory: {:?}", args.output_dir);
         println!("⚡ Parallel processing: {}", args.parallel);
     }
     
-    let processor = ArticleProcessor::new(args.articles_dir, args.output_dir, args.verbose);
+    let processor = ArticleProcessor::new(articles_dir, args.output_dir, args.verbose);
     
     if args.parallel {
         processor.process_all_articles_parallel()
