@@ -21,7 +21,7 @@ dev-rebuild: ci-optimize-images ci-process-articles _copy-assets _dev-build-wasm
 # Small helper: build wasm in dev (no --release) to keep quick feedback during dev
 _dev-build-wasm:
 	@echo "🔧 Building WebAssembly (debug) for dev..."
-	@cd khimoo-portfolio && trunk build --public-url /portfolio-page/
+	@cd khimoo-portfolio && trunk build --public-url /
 	@echo "✅ dev wasm build finished"
 
 # Optional convenience: run only data pipeline (images + articles) without wasm
@@ -49,7 +49,7 @@ build-data: process-articles validate-links
 # Build WebAssembly application for production deployment
 build: build-data
     @echo "🏗️  Building for production..."
-    @trunk build --release
+    @cd khimoo-portfolio && trunk build --release --public-url /portfolio-page/
 
 # Run all tests: unit tests and WebAssembly browser tests
 test:
@@ -291,13 +291,6 @@ _copy-deployment-files:
         echo "✅ Created 404.html from index.html"; \
     else \
         echo "⚠️ index.html not found, cannot create 404.html"; \
-    fi
-    @# Copy test data loader if it exists
-    @if [ -f "test-data-loader.html" ]; then \
-        cp test-data-loader.html public/ && \
-        echo "✅ Copied test-data-loader.html"; \
-    else \
-        echo "⚠️ test-data-loader.html not found"; \
     fi
 
 # Verify deployment directory structure and essential files

@@ -1,6 +1,6 @@
 use super::data_loader::{use_article_content, use_lightweight_articles, DataLoader};
 use super::routes::Route;
-use super::utils::resolve_image_path;
+use crate::config::get_config;
 use pulldown_cmark::{html, Parser};
 use regex::Regex;
 use wasm_bindgen::JsCast;
@@ -443,7 +443,7 @@ pub fn article_view(props: &ArticleViewProps) -> Html {
                             </div>
                             {
                                 if let Some(author_image) = &article_data.metadata.author_image {
-                                    let resolved_image_path = resolve_image_path(author_image);
+                                    let resolved_image_path = get_config().get_url(author_image);
                                     html! {
                                         <div style="flex-shrink: 0; display: flex; align-items: stretch;">
                                             <img

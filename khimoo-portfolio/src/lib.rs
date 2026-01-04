@@ -1,4 +1,5 @@
 pub mod home;
+pub mod config;
 
 // Only include article_processing for non-WASM targets
 #[cfg(not(target_arch = "wasm32"))]

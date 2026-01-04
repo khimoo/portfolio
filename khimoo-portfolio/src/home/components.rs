@@ -2,7 +2,7 @@ use super::data_loader::{use_articles_data, ArticlesData, ProcessedArticle};
 use super::physics_sim::{PhysicsWorld, Viewport};
 use super::types::*;
 use super::routes::Route;
-use super::utils::resolve_image_path;
+use crate::config::get_config;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
@@ -26,12 +26,13 @@ fn determine_node_content(article: &ProcessedArticle) -> NodeContent {
         );
 
         // 最適化された中サイズ画像を使用（パフォーマンスと品質のバランス）
-        let optimized_image_url = if image_url.starts_with("/articles/") {
+        let optimized_image_url = if image_url.starts_with("articles/") || image_url.starts_with("/articles/") {
             // 元の画像パスから最適化された中サイズ画像パスを生成
-            let optimized_path = image_url.replace("/articles/img/author_img.png", "/articles/img/author_img_medium.png");
-            resolve_image_path(&optimized_path)
+            let optimized_path = image_url.replace("articles/img/author_img.png", "articles/img/author_img_medium.png")
+                                          .replace("/articles/img/author_img.png", "/articles/img/author_img_medium.png");
+            get_config().get_url(&optimized_path)
         } else {
-            resolve_image_path(image_url)
+            get_config().get_url(image_url)
         };
 
         NodeContent::Author {

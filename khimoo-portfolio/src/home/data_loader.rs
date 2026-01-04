@@ -3,6 +3,7 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::JsFuture;
 use web_sys::{Request, RequestInit, RequestMode, Response};
 use yew::prelude::*;
+use crate::config::{get_config, AppConfig};
 
 // Data structures matching the generated JSON format
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -139,69 +140,26 @@ impl std::error::Error for DataLoadError {}
 // DataLoader structure for loading static JSON files
 #[derive(Debug, Clone)]
 pub struct DataLoader {
-    base_url: String,
+    config: &'static AppConfig,
 }
 
 impl DataLoader {
     pub fn new() -> Self {
-        // Automatically detect the correct base URL based on the current location
-        let base_url = Self::detect_base_url();
-        Self { base_url }
-    }
-
-    // Detect the correct base URL based on the current window location
-    fn detect_base_url() -> String {
-        if let Some(window) = web_sys::window() {
-            if let Some(location) = window.location().pathname().ok() {
-                web_sys::console::log_1(&format!("DataLoader: Current pathname: {}", location).into());
-
-                // Check if we're in debug mode (local development)
-                if cfg!(debug_assertions) {
-                    web_sys::console::log_1(&"DataLoader: Debug mode detected, using /data".into());
-                    return "/data".to_string();
-                }
-
-                // If we're in a subdirectory (like /portfolio-page/), use that as the base
-                if location.starts_with("/portfolio-page/") || location.contains("/portfolio-page") {
-                    web_sys::console::log_1(&"DataLoader: Detected GitHub Pages subdirectory, using /portfolio-page/data".into());
-                    return "/portfolio-page/data".to_string();
-                }
-            }
-
-            // Also check the hostname for additional context
-            if let Some(hostname) = window.location().hostname().ok() {
-                web_sys::console::log_1(&format!("DataLoader: Current hostname: {}", hostname).into());
-                if hostname.contains("github.io") {
-                    web_sys::console::log_1(&"DataLoader: Detected GitHub Pages, using /portfolio-page/data".into());
-                    return "/portfolio-page/data".to_string();
-                }
-            }
+        Self { 
+            config: get_config(),
         }
-
-        web_sys::console::log_1(&"DataLoader: Using default base URL: /data".into());
-        // Default fallback
-        "/data".to_string()
-    }
-
-    pub fn with_base_url(base_url: String) -> Self {
-        Self { base_url }
     }
 
     // Load articles data with error handling and fallback
     pub async fn load_articles(&self) -> Result<ArticlesData, DataLoadError> {
-        let url = format!("{}/articles.json", self.base_url);
+        let url = self.config.data_url("articles.json");
 
         // Debug logging
-        web_sys::console::log_1(&format!("DataLoader: Attempting to load articles from: {}", url).into());
-        web_sys::console::log_1(&format!("DataLoader: Base URL detected as: {}", self.base_url).into());
+        web_sys::console::log_1(&format!("DataLoader: Loading articles from: {}", url).into());
 
         match self.fetch_json::<ArticlesData>(&url).await {
             Ok(data) => {
                 web_sys::console::log_1(&format!("DataLoader: Successfully loaded {} articles", data.articles.len()).into());
-                // Log first few article slugs for debugging
-                for (i, article) in data.articles.iter().take(5).enumerate() {
-                    web_sys::console::log_1(&format!("DataLoader: Article {}: slug='{}', title='{}'", i, article.slug, article.title).into());
-                }
                 Ok(data)
             },
             Err(e) => {
@@ -231,33 +189,11 @@ impl DataLoader {
 
     // Load full article content from file path
     pub async fn load_article_content(&self, file_path: &str) -> Result<String, DataLoadError> {
-        // Determine where articles are served
-        let articles_base_url = if cfg!(debug_assertions) {
-            "/articles"
-        } else if self.base_url.contains("/portfolio-page") {
-            "/portfolio-page/articles"
-        } else {
-            "/articles"
-        };
-
-        // Normalize file_path and avoid double "articles/articles"
-        let fp = file_path.trim_start_matches('/'); // remove leading slash if any
-        let url = if fp.starts_with("articles/") {
-            // file_path already contains "articles/..." -> drop the leading segment and join with base
-            let tail = fp.trim_start_matches("articles/").trim_start_matches('/');
-            format!("{}/{}", articles_base_url, tail)
-        } else if fp.starts_with(articles_base_url.trim_start_matches('/')) {
-            // file_path already contains the same base (e.g. "portfolio-page/articles/...")
-            format!("/{}", fp)
-        } else {
-            // normal case: prefix articles base
-            format!("{}/{}", articles_base_url, fp)
-        };
-
+        let url = self.config.article_url(file_path);
         web_sys::console::log_1(&format!("DataLoader: Loading article content from: {}", url).into());
 
         // Fetch the markdown file
-        let mut opts = RequestInit::new();
+        let opts = RequestInit::new();
         opts.set_method("GET");
         opts.set_mode(RequestMode::Cors);
 
@@ -278,15 +214,6 @@ impl DataLoader {
         web_sys::console::log_1(&format!("DataLoader: Response status: {} {}", resp.status(), resp.status_text()).into());
 
         if !resp.ok() {
-            // Try to capture text body if available for better debugging
-            let status = resp.status();
-            let status_text = resp.status_text();
-            let body_preview = JsFuture::from(resp.text().map_err(|_| DataLoadError::ParseError("Failed to get text for error preview".to_string()))?)
-                .await
-                .ok()
-                .and_then(|v| v.as_string());
-            web_sys::console::warn_1(&format!("DataLoader: Non-OK response: {} {} preview: {:?}", status, status_text, body_preview).into());
-
             return Err(DataLoadError::NotFound(format!(
                 "HTTP {}: {}",
                 resp.status(),
@@ -302,10 +229,6 @@ impl DataLoader {
 
         let content = text.as_string()
             .ok_or_else(|| DataLoadError::ParseError("Response is not a string".to_string()))?;
-
-        // Debug: preview the first N characters to aid diagnosis
-        let preview = if content.len() > 500 { &content[..500] } else { &content };
-        web_sys::console::log_1(&format!("DataLoader: Content preview (first 500 chars): {}", preview).into());
 
         Ok(content)
     }

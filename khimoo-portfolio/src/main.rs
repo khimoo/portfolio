@@ -5,6 +5,7 @@ use khimoo_portfolio::home::app::Home;
 use khimoo_portfolio::home::article::{ArticleIndex, ArticleView};
 use khimoo_portfolio::home::header::Header;
 use khimoo_portfolio::home::routes::Route;
+use khimoo_portfolio::config::get_config;
 
 
 
@@ -19,10 +20,11 @@ fn switch(routes: Route) -> Html {
 
 #[function_component(Root)]
 fn root() -> Html {
-    let basename = if cfg!(debug_assertions) {
+    let config = get_config();
+    let basename = if config.base_path.is_empty() {
         "/".to_string()
     } else {
-        "/portfolio-page/".to_string() // github pagesのURL
+        format!("{}/", config.base_path)
     };
 
     html! {

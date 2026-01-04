@@ -2,10 +2,10 @@
 # Build configuration
 target = "index.html"
 dist = "dist"
-public_url = "/"
+# public_url will be set by build commands
 
 [serve]
-# Serve configuration
+# Serve configuration for local development
 addresses = ["127.0.0.1"]
 port = 8080
 open = false
