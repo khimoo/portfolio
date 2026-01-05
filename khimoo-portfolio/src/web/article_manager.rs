@@ -3,8 +3,7 @@ use yew::prelude::*;
 
 use crate::web::data_loader::{ArticlesData, ProcessedArticle, LightweightArticle, DataLoadError, DataLoader};
 use crate::web::types::data_types::NodeRegistry;
-use crate::web::types::node_types::{NodeId, NodeContent, AUTHOR_NODE_ID, ConnectionLineType};
-use crate::web::types::physics_types::Position;
+use crate::web::types::node_types::{NodeId, AUTHOR_NODE_ID};
 
 /// ArticleManager provides unified management of article data and node data
 /// Integrates core module data with web-specific requirements

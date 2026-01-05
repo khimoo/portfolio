@@ -9,7 +9,7 @@ use crate::config::{get_config, AppConfig};
 use crate::core::articles::metadata::ArticleMetadata;
 use crate::core::articles::links::ExtractedLink;
 use crate::web::types::data_types::NodeRegistry;
-use crate::web::types::node_types::{NodeId, NodeContent, NodeType, ConnectionLine, ConnectionLineType, AUTHOR_NODE_ID};
+use crate::web::types::node_types::{NodeId, NodeContent, ConnectionLineType, AUTHOR_NODE_ID};
 use crate::web::types::physics_types::Position;
 
 /// Articles data structure matching CLI output
@@ -190,7 +190,6 @@ impl DataLoader {
                         
                         // Add connection line with appropriate type and strength
                         let connection_type = match link.link_type {
-                            crate::core::articles::links::LinkType::WikiLink => ConnectionLineType::Strong,
                             crate::core::articles::links::LinkType::MarkdownLink => ConnectionLineType::Medium,
                             crate::core::articles::links::LinkType::ExternalLink => ConnectionLineType::Weak,
                         };
