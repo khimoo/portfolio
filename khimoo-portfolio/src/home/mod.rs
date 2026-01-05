@@ -7,3 +7,7 @@ pub mod data_loader;
 pub mod article_manager;
 pub mod header;
 pub mod routes;
+pub mod styles;
+
+#[cfg(debug_assertions)]
+pub mod debug_panel;

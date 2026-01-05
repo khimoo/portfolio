@@ -6,6 +6,7 @@ use khimoo_portfolio::home::article::{ArticleIndex, ArticleView};
 use khimoo_portfolio::home::header::Header;
 use khimoo_portfolio::home::routes::Route;
 use khimoo_portfolio::config::get_config;
+use khimoo_portfolio::home::styles::LayoutStyles;
 
 
 
@@ -30,7 +31,7 @@ fn root() -> Html {
     html! {
         <BrowserRouter basename={basename}>
             <>
-                <div style="height:100vh;margin:0;padding:0;display: flex; flex-direction: column"> // wrapperクラスにしてcss外部化していきたい
+                <div style={LayoutStyles::app_wrapper()}>
                     <Header />
                     <Switch<Route> render={switch} />
                 </div>

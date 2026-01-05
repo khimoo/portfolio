@@ -3,6 +3,7 @@ use super::physics_sim::{PhysicsWorld, Viewport};
 use super::types::*;
 use super::routes::Route;
 use crate::config::get_config;
+use crate::home::styles::{LoadingStyles, ErrorStyles, LayoutStyles, NodeStyles, AnimationStyles};
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
@@ -475,11 +476,11 @@ pub fn node_graph_container(props: &NodeGraphContainerProps) -> Html {
     // ローディング中やエラー時の表示
     if *loading {
         return html! {
-            <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f0f0;">
-                <div style="text-align: center;">
+            <div style={LoadingStyles::container()}>
+                <div style={LoadingStyles::text()}>
                     <h2>{"記事データを読み込み中..."}</h2>
                     <div style="margin-top: 20px;">
-                        <div style="border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 0 auto;"></div>
+                        <div style={LoadingStyles::spinner()}></div>
                     </div>
                 </div>
             </div>
@@ -488,10 +489,10 @@ pub fn node_graph_container(props: &NodeGraphContainerProps) -> Html {
 
     if let Some(err) = error.as_ref() {
         return html! {
-            <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f0f0;">
-                <div style="text-align: center; color: #e74c3c;">
-                    <h2>{"データの読み込みに失敗しました"}</h2>
-                    <p>{format!("エラー: {}", err)}</p>
+            <div style={ErrorStyles::container()}>
+                <div style={ErrorStyles::content()}>
+                    <h2 style={ErrorStyles::title()}>{"データの読み込みに失敗しました"}</h2>
+                    <p style={ErrorStyles::message()}>{format!("エラー: {}", err)}</p>
                 </div>
             </div>
         };
@@ -500,26 +501,17 @@ pub fn node_graph_container(props: &NodeGraphContainerProps) -> Html {
     html! {
         <>
             <style>
-                {"@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }"}
+                {AnimationStyles::spinner_keyframes()}
             </style>
             <div
-                style="display: flex; width: 100%; height: 100%; background: #081D35;"
+                style={LayoutStyles::physics_container()}
                 onmousemove={on_mouse_move}
                 onmouseup={on_mouse_up}
                 ref={props.container_ref.clone()}
             >
                 <div style={format!(
-                    "position: absolute;
-                    left: 50%;
-                    top: {}px;
-                    transform: translateX(-50%);
-                    border-radius: 20px;
-                    z-index: 50;
-                    text-align: center;
-                    font-size: 23px;
-                    color: white;
-                    backdrop-filter: blur(10px);
-                    pointer-events: none;",
+                    "{} top: {}px;",
+                    LayoutStyles::welcome_overlay(),
                     (props.container_bound.height / 2.0 + 100.0) as i32
                 )}>
                     <span style="display:flex; flex-direction: column; margin-bottom:12px">
@@ -642,6 +634,7 @@ pub fn node_graph_container(props: &NodeGraphContainerProps) -> Html {
                                             y2={format!("{:.2}", p2.y)}
                                             stroke="#8a8a8a"
                                             stroke-width="1.5"
+                                            style={NodeStyles::connection_line()}
                                         />
                                     })
                                 }).collect::<Html>()
@@ -698,7 +691,7 @@ pub struct NodeProps {
 #[function_component(NodeComponent)]
 fn node_component(props: &NodeProps) -> Html {
     // 重要度とリンク数に基づいて動的にサイズを計算
-    let dynamic_radius =
+    let _dynamic_radius =
         calculate_dynamic_radius(props.radius, props.importance, props.inbound_count);
 
     // Author画像の場合は画像がノード全体を覆うようにする
@@ -712,24 +705,8 @@ fn node_component(props: &NodeProps) -> Html {
             key={props.id.0.to_string()}
             onmousedown={props.on_mouse_down.clone()}
             style={format!(
-                "position: absolute;
-                width: {}px;
-                height: {}px;
-                background-color: slateblue;
-                border-radius: 50%;
-                transform: translate(-50%, -50%);
-                left: {}px;
-                top: {}px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                z-index: 10;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                transition: transform 0.2s ease-in-out;
-                user-select: none;",
-                2 * dynamic_radius,
-                2 * dynamic_radius,
+                "{} left: {}px; top: {}px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 10; display: flex; justify-content: center; align-items: center; position: absolute; cursor: pointer; transition: transform 0.2s ease-in-out; user-select: none;",
+                NodeStyles::node_circle(props.radius as f64 * 2.0),
                 props.pos.x,
                 props.pos.y
             )}

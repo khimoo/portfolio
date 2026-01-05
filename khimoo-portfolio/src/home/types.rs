@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use yew::{html, Html};
 use yew_router::prelude::*;
 use super::routes::Route;
+use super::styles::{NodeStyles, get_default_category_colors, CategoryColor};
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct ForceSettings {
@@ -80,13 +81,13 @@ pub struct NodeId(pub u32);
 // Special node ID for the author node (always 0)
 pub const AUTHOR_NODE_ID: NodeId = NodeId(0);
 
-#[derive(Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum NodeType {
     Author,
     Article,
 }
 
-#[derive(Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum NodeContent {
     Text(String),
     Image(String), // 画像URLのみ
@@ -104,7 +105,7 @@ impl NodeContent {
     pub fn render_content(&self) -> Html {
         match self {
             NodeContent::Text(text) => html! {
-                <span style="color: white; font-size: 12px;">
+                <span style={NodeStyles::text_node()}>
                     {text}
                 </span>
             },
@@ -121,7 +122,7 @@ impl NodeContent {
                     if url == "/" {
                         html! {
                             <Link<Route> to={Route::Home}>
-                                <span style="color: lightblue; text-decoration: none; font-size: 12px;">
+                                <span style={NodeStyles::link_node()}>
                                     {text}
                                 </span>
                             </Link<Route>>
@@ -129,7 +130,7 @@ impl NodeContent {
                     } else if url == "/article" {
                         html! {
                             <Link<Route> to={Route::ArticleIndex}>
-                                <span style="color: lightblue; text-decoration: none; font-size: 12px;">
+                                <span style={NodeStyles::link_node()}>
                                     {text}
                                 </span>
                             </Link<Route>>
@@ -138,7 +139,7 @@ impl NodeContent {
                         let slug = url.strip_prefix("/article/").unwrap_or("").to_string();
                         html! {
                             <Link<Route> to={Route::ArticleShow { slug }}>
-                                <span style="color: lightblue; text-decoration: none; font-size: 12px;">
+                                <span style={NodeStyles::link_node()}>
                                     {text}
                                 </span>
                             </Link<Route>>
@@ -148,7 +149,7 @@ impl NodeContent {
                         html! {
                             <a
                                 href={url.clone()}
-                                style="color: lightblue; text-decoration: none; font-size: 12px;"
+                                style={NodeStyles::link_node()}
                             >
                                 {text}
                             </a>
@@ -161,7 +162,7 @@ impl NodeContent {
                             href={url.clone()}
                             target="_blank"
                             rel="noopener noreferrer"
-                            style="color: lightblue; text-decoration: none; font-size: 12px;"
+                            style={NodeStyles::link_node()}
                         >
                             {text}
                         </a>
@@ -171,7 +172,7 @@ impl NodeContent {
             NodeContent::Author { name: _, image_url, bio: _ } => html! {
                     <img
                         src={image_url.clone()}
-                        style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"
+                        style={NodeStyles::author_image()}
                         loading="lazy"
                         decoding="async"
                     />
@@ -203,6 +204,7 @@ pub enum ConnectionLineType {
     AuthorToArticle,
 }
 
+#[derive(Debug, Clone, PartialEq)]
 pub struct NodeRegistry {
     pub positions: HashMap<NodeId, Position>,
     pub radii: HashMap<NodeId, i32>,
@@ -216,48 +218,9 @@ pub struct NodeRegistry {
     pub node_inbound_counts: HashMap<NodeId, usize>,
 }
 
-#[derive(Debug, Clone, PartialEq)]
-pub struct CategoryColor {
-    pub primary: String,   // Main node color
-    pub secondary: String, // Border or accent color
-    pub text: String,      // Text color for contrast
-}
-
 impl NodeRegistry {
     pub fn new() -> Self {
-        let mut category_colors = HashMap::new();
-
-        // Default category colors
-        category_colors.insert("programming".to_string(), CategoryColor {
-            primary: "#4A90E2".to_string(),   // Blue
-            secondary: "#357ABD".to_string(),
-            text: "#FFFFFF".to_string(),
-        });
-        category_colors.insert("web".to_string(), CategoryColor {
-            primary: "#7ED321".to_string(),   // Green
-            secondary: "#5BA517".to_string(),
-            text: "#FFFFFF".to_string(),
-        });
-        category_colors.insert("rust".to_string(), CategoryColor {
-            primary: "#CE422B".to_string(),   // Rust orange
-            secondary: "#A0341F".to_string(),
-            text: "#FFFFFF".to_string(),
-        });
-        category_colors.insert("design".to_string(), CategoryColor {
-            primary: "#BD10E0".to_string(),   // Purple
-            secondary: "#9013B0".to_string(),
-            text: "#FFFFFF".to_string(),
-        });
-        category_colors.insert("tutorial".to_string(), CategoryColor {
-            primary: "#F5A623".to_string(),   // Orange
-            secondary: "#D1891C".to_string(),
-            text: "#FFFFFF".to_string(),
-        });
-        category_colors.insert("default".to_string(), CategoryColor {
-            primary: "#9B9B9B".to_string(),   // Gray
-            secondary: "#7B7B7B".to_string(),
-            text: "#FFFFFF".to_string(),
-        });
+        let category_colors = get_default_category_colors();
 
         Self {
             positions: HashMap::new(),

@@ -1,5 +1,6 @@
 use yew::prelude::*;
 use crate::home::types::{ForceSettings, NodeRegistry};
+use crate::home::styles::{DebugStyles, InputStyles};
 
 #[cfg(debug_assertions)]
 pub mod debug_panel {
@@ -90,27 +91,13 @@ pub mod debug_panel {
         };
 
         html! {
-            <div class="debug-panel" style="
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                background: rgba(0, 0, 0, 0.8);
-                color: white;
-                padding: 15px;
-                border-radius: 8px;
-                font-family: monospace;
-                font-size: 12px;
-                z-index: 1000;
-                min-width: 250px;
-                max-height: 80vh;
-                overflow-y: auto;
-            ">
-                <h3 style="margin: 0 0 10px 0; color: #4CAF50;">{"Physics Debug Panel"}</h3>
+            <div class="debug-panel" style={DebugStyles::panel()}>
+                <h3 style={DebugStyles::title()}>{"Physics Debug Panel"}</h3>
                 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px;">
+                <div style={DebugStyles::section()}>
+                    <label style={DebugStyles::label()}>
                         {"Repulsion Strength: "}
-                        <span style="color: #FFC107;">{format!("{:.0}", force_settings.repulsion_strength)}</span>
+                        <span style={DebugStyles::value()}>{format!("{:.0}", force_settings.repulsion_strength)}</span>
                     </label>
                     <input 
                         type="range" 
@@ -119,14 +106,14 @@ pub mod debug_panel {
                         step="1000"
                         value={force_settings.repulsion_strength.to_string()}
                         onchange={on_repulsion_change}
-                        style="width: 100%;"
+                        style={InputStyles::range()}
                     />
                 </div>
 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px;">
+                <div style={DebugStyles::section()}>
+                    <label style={DebugStyles::label()}>
                         {"Author Repulsion Distance: "}
-                        <span style="color: #FFC107;">{format!("{:.0}", force_settings.author_repulsion_min_distance)}</span>
+                        <span style={DebugStyles::value()}>{format!("{:.0}", force_settings.author_repulsion_min_distance)}</span>
                     </label>
                     <input 
                         type="range" 
@@ -135,14 +122,14 @@ pub mod debug_panel {
                         step="10"
                         value={force_settings.author_repulsion_min_distance.to_string()}
                         onchange={on_author_repulsion_distance_change}
-                        style="width: 100%;"
+                        style={InputStyles::range()}
                     />
                 </div>
 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px;">
+                <div style={DebugStyles::section()}>
+                    <label style={DebugStyles::label()}>
                         {"Link Strength: "}
-                        <span style="color: #FFC107;">{format!("{:.0}", force_settings.link_strength)}</span>
+                        <span style={DebugStyles::value()}>{format!("{:.0}", force_settings.link_strength)}</span>
                     </label>
                     <input 
                         type="range" 
@@ -151,14 +138,14 @@ pub mod debug_panel {
                         step="500"
                         value={force_settings.link_strength.to_string()}
                         onchange={on_link_strength_change}
-                        style="width: 100%;"
+                        style={InputStyles::range()}
                     />
                 </div>
 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px;">
+                <div style={DebugStyles::section()}>
+                    <label style={DebugStyles::label()}>
                         {"Center Strength: "}
-                        <span style="color: #FFC107;">{format!("{:.0}", force_settings.center_strength)}</span>
+                        <span style={DebugStyles::value()}>{format!("{:.0}", force_settings.center_strength)}</span>
                     </label>
                     <input 
                         type="range" 
@@ -167,12 +154,12 @@ pub mod debug_panel {
                         step="1000"
                         value={force_settings.center_strength.to_string()}
                         onchange={on_center_strength_change}
-                        style="width: 100%;"
+                        style={InputStyles::range()}
                     />
                 </div>
 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: flex; align-items: center; gap: 8px;">
+                <div style={DebugStyles::section()}>
+                    <label style={DebugStyles::checkbox_label()}>
                         <input 
                             type="checkbox" 
                             checked={force_settings.debug_mode}
@@ -182,8 +169,8 @@ pub mod debug_panel {
                     </label>
                 </div>
 
-                <div style="margin-bottom: 15px;">
-                    <label style="display: flex; align-items: center; gap: 8px;">
+                <div style={DebugStyles::section()}>
+                    <label style={DebugStyles::checkbox_label()}>
                         <input 
                             type="checkbox" 
                             checked={force_settings.show_connection_lines}
