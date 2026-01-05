@@ -161,7 +161,7 @@ importance: 4
 
 # Test Article
 
-This is a test article with a [[link-to-other]] and [markdown link](other-article).
+This is a test article with [markdown link](other-article).
 "#;
 
         let path = PathBuf::from("test-article.md");
@@ -170,7 +170,7 @@ This is a test article with a [[link-to-other]] and [markdown link](other-articl
         assert_eq!(result.slug, "test-article");
         assert_eq!(result.title, "Test Article");
         assert_eq!(result.metadata.importance, 4);
-        assert_eq!(result.outbound_links.len(), 2);
+        assert_eq!(result.outbound_links.len(), 1);
     }
 
     #[test]

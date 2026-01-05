@@ -431,15 +431,15 @@ mod tests {
         let links = vec![
             ExtractedLink {
                 target_slug: "existing-article".to_string(),
-                link_type: super::super::extractor::LinkType::WikiLink,
-                original_text: "[[existing-article]]".to_string(),
-                display_text: None,
+                link_type: super::super::extractor::LinkType::MarkdownLink,
+                original_text: "[existing article](existing-article)".to_string(),
+                display_text: Some("existing article".to_string()),
             },
             ExtractedLink {
                 target_slug: "missing-article".to_string(),
-                link_type: super::super::extractor::LinkType::WikiLink,
-                original_text: "[[missing-article]]".to_string(),
-                display_text: None,
+                link_type: super::super::extractor::LinkType::MarkdownLink,
+                original_text: "[missing article](missing-article)".to_string(),
+                display_text: Some("missing article".to_string()),
             },
         ];
 

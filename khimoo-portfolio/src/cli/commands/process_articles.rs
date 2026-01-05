@@ -8,7 +8,7 @@ use chrono::Utc;
 #[cfg(feature = "cli-tools")]
 use crate::core::media::image_optimizer::ImageOptimizer;
 use crate::core::articles::processor::ArticleProcessor;
-use crate::core::articles::links::{ExtractedLink, ProcessedArticleRef, LinkType};
+use crate::core::articles::links::{ExtractedLink, ProcessedArticleRef};
 use crate::core::articles::metadata::ArticleMetadata;
 use crate::config_loader::{get_default_articles_dir, get_images_dir};
 

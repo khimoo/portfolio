@@ -72,22 +72,6 @@ fn test_parse_no_front_matter() {
 }
 
 #[test]
-fn test_extract_wiki_links() {
-    let extractor = LinkExtractor::new().unwrap();
-    let content = "This is a [[test article]] and another [[Second Article]].";
-    
-    let links = extractor.extract_internal_links(content);
-    
-    assert_eq!(links.len(), 2);
-    
-    assert_eq!(links[0].target_slug, "test-article");
-    assert_eq!(links[0].link_type, LinkType::WikiLink);
-    
-    assert_eq!(links[1].target_slug, "second-article");
-    assert_eq!(links[1].link_type, LinkType::WikiLink);
-}
-
-#[test]
 fn test_extract_markdown_links() {
     let extractor = LinkExtractor::new().unwrap();
     let content = "Check out [this article](article-slug) and [another one](second-slug).";
