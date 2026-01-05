@@ -1,5 +1,6 @@
 pub mod home;
 pub mod config;
+pub mod styles;
 
 // Only include articles module for non-WASM targets
 #[cfg(not(target_arch = "wasm32"))]

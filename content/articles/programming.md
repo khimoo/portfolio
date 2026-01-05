@@ -7,5 +7,5 @@ tags: []
 created_at: "2025-12-28T18:30:38Z"
 updated_at: "2026-01-02T18:00:11Z"
 ---
-[[Linux]]
-[[Neovim]]
+[Linux](linux)
+[Neovim](neovim)

@@ -7,10 +7,10 @@ tags: []
 created_at: "2025-12-29T03:30:38Z"
 updated_at: "2026-01-02T19:21:29Z"
 ---
-[[programming]]
-[[Linux]]
-[[Neovim]]
-[[mini_farm|家庭菜園]]
-[[drawing|絵]]
-[[music|音楽]]
+[プログラミング](programming)
+[Linux](linux)
+[Neovim](neovim)
+[家庭菜園](mini_farm)
+[絵](drawing)
+[音楽](music)
 

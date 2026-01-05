@@ -236,12 +236,7 @@ impl ArticleProcessor {
             if !outbound_links.is_empty() {
                 println!("   🔗 Outbound links: {}", outbound_links.len());
                 for link in &outbound_links {
-                    println!("      → {} ({})", link.target_slug, 
-                        match link.link_type {
-                            khimoo_portfolio::articles::LinkType::WikiLink => "wiki",
-                            khimoo_portfolio::articles::LinkType::MarkdownLink => "markdown",
-                        }
-                    );
+                    println!("      → {} (markdown)", link.target_slug);
                 }
             }
             if !metadata.tags.is_empty() {

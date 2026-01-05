@@ -22,7 +22,7 @@ fn test_front_matter_tag_integration() {
 :
 :## 基本概念
 :
-:非同期プログラミングを理解するには、まず[[tokio-basics]]を理解することから始めましょう。
+:非同期プログラミングを理解するには、まず[Tokio基礎](tokio-basics)を理解することから始めましょう。
 :実用的な[パターン集](async-patterns)も参考になります。
 :
 :## 主要な特徴
@@ -31,7 +31,7 @@ fn test_front_matter_tag_integration() {
 :- async/await構文
 :- 非同期ランタイム
 :
-:[[hello]]の記事でも触れましたが、非同期処理は現代のWebアプリケーション開発において重要な概念です。
+:[Hello記事](hello)でも触れましたが、非同期処理は現代のWebアプリケーション開発において重要な概念です。
 :"#;
 
     let content = content.replace("\n:", "\n");
@@ -70,7 +70,6 @@ fn test_node_navigation_integration() {
     let test_article = ProcessedArticle {
         slug: "test-article".to_string(),
         title: "Test Article".to_string(),
-        content: "# Test Article\n\nThis is a test article.".to_string(),
         metadata: ProcessedMetadata {
             title: "Test Article".to_string(),
             home_display: true,
@@ -84,7 +83,7 @@ fn test_node_navigation_integration() {
         },
         file_path: "articles/test-article.md".to_string(),
         outbound_links: vec![],
-        inbound_count: 0,
+        inbound_links: vec![],
         processed_at: "2024-01-01T00:00:00Z".to_string(),
     };
 

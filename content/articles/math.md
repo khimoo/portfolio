@@ -7,4 +7,4 @@ tags: []
 created_at: 2025-12-28T18:30:38Z
 updated_at: 2025-12-29T00:53:06Z
 ---
-[[continuum_theory]]
+[連続体理論](continuum_theory)
