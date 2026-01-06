@@ -26,7 +26,7 @@ This is the markdown content.
     let (metadata, markdown) = extractor.extract_frontmatter(content).unwrap();
 
     assert_eq!(metadata.title, "Test Article");
-    assert_eq!(metadata.home_display, true);
+    assert!(metadata.home_display);
     assert_eq!(metadata.category, Some("programming".to_string()));
     assert_eq!(metadata.importance, 4);
     assert_eq!(metadata.related_articles, vec!["article1", "article2"]);
@@ -48,7 +48,7 @@ title: "Minimal Article"
     let (metadata, markdown) = extractor.extract_frontmatter(content).unwrap();
 
     assert_eq!(metadata.title, "Minimal Article");
-    assert_eq!(metadata.home_display, false); // default
+    assert!(!metadata.home_display); // default
     assert_eq!(metadata.category, None);
     assert_eq!(metadata.importance, 3); // default
     assert!(metadata.related_articles.is_empty());
@@ -65,7 +65,7 @@ fn test_parse_no_front_matter() {
     let (metadata, markdown) = extractor.extract_frontmatter(content).unwrap();
 
     assert_eq!(metadata.title, "Untitled"); // default
-    assert_eq!(metadata.home_display, false);
+    assert!(!metadata.home_display);
     assert_eq!(metadata.importance, 3);
 
     assert_eq!(markdown, content);

@@ -203,7 +203,7 @@ mod tests {
             metadata: ArticleMetadata::default(),
             outbound_links: Vec::new(),
             inbound_links: Vec::new(),
-            file_path: format!("{}.md", slug),
+            file_path: format!("{slug}.md"),
         }
     }
 

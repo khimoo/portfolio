@@ -50,8 +50,7 @@ impl ArticleProcessor {
 
         if !articles_dir.exists() {
             return Err(anyhow::anyhow!(
-                "Articles directory not found: {:?}",
-                articles_dir
+                "Articles directory not found: {articles_dir:?}"
             ));
         }
 
@@ -60,12 +59,12 @@ impl ArticleProcessor {
             let entry = entry?;
             let path = entry.path();
 
-            if path.is_file() && path.extension().map_or(false, |ext| ext == "md") {
+            if path.is_file() && path.extension().is_some_and(|ext| ext == "md") {
                 let content = std::fs::read_to_string(&path)?;
                 match self.process_article(&path, &content) {
                     Ok(article) => articles.push(article),
                     Err(e) => {
-                        eprintln!("Warning: Failed to process {:?}: {}", path, e);
+                        eprintln!("Warning: Failed to process {path:?}: {e}");
                     }
                 }
             }

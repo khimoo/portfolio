@@ -92,7 +92,7 @@ pub fn get_default_articles_dir() -> PathBuf {
     match load_project_config() {
         Ok(config) => {
             if let Some(articles_dir) = config.get("articles_dir") {
-                PathBuf::from(format!("../{}", articles_dir))
+                PathBuf::from(format!("../{articles_dir}"))
             } else {
                 PathBuf::from("../content/articles")
             }

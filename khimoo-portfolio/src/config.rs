@@ -17,9 +17,9 @@ impl AppConfig {
         let base_path = Self::detect_base_path();
 
         Self {
-            data_path: format!("{}/data", base_path),
-            articles_path: format!("{}/articles", base_path),
-            assets_path: format!("{}/assets", base_path),
+            data_path: format!("{base_path}/data"),
+            articles_path: format!("{base_path}/articles"),
+            assets_path: format!("{base_path}/assets"),
             base_path,
         }
     }
@@ -56,7 +56,7 @@ impl AppConfig {
     pub fn get_url(&self, resource_path: &str) -> String {
         let clean_path = resource_path.trim_start_matches('/');
         if self.base_path.is_empty() {
-            format!("/{}", clean_path)
+            format!("/{clean_path}")
         } else {
             format!("{}/{}", self.base_path, clean_path)
         }
@@ -64,7 +64,7 @@ impl AppConfig {
 
     /// Get data file URL
     pub fn data_url(&self, filename: &str) -> String {
-        self.get_url(&format!("data/{}", filename))
+        self.get_url(&format!("data/{filename}"))
     }
 
     /// Get article file URL
@@ -73,14 +73,14 @@ impl AppConfig {
         let clean_path = filepath.trim_start_matches('/');
 
         // Extract just the filename from paths like "../content/articles/about-khimoo.md"
-        let filename = if let Some(filename) = clean_path.split('/').last() {
+        let filename = if let Some(filename) = clean_path.split('/').next_back() {
             filename
         } else {
             clean_path
         };
 
         if self.base_path.is_empty() {
-            format!("/articles/{}", filename)
+            format!("/articles/{filename}")
         } else {
             format!("{}/articles/{}", self.base_path, filename)
         }
@@ -98,5 +98,5 @@ static CONFIG: OnceLock<AppConfig> = OnceLock::new();
 
 /// Get the global configuration instance
 pub fn get_config() -> &'static AppConfig {
-    CONFIG.get_or_init(|| AppConfig::new())
+    CONFIG.get_or_init(AppConfig::new)
 }

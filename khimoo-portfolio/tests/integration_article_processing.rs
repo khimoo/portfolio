@@ -39,7 +39,7 @@ fn test_front_matter_tag_integration() {
     let (metadata, _markdown_content) = extractor.extract_frontmatter(&content).unwrap();
     assert_eq!(metadata.tags, vec!["rust", "async", "programming"]);
     assert_eq!(metadata.title, "Rustでの非同期プログラミング");
-    assert_eq!(metadata.home_display, true);
+    assert!(metadata.home_display);
     assert_eq!(metadata.category, Some("programming".to_string()));
     assert_eq!(metadata.importance, 4);
     assert_eq!(
@@ -87,7 +87,7 @@ This is a test article."#;
     let (metadata, _) = extractor.extract_frontmatter(content).unwrap();
 
     assert_eq!(metadata.title, "Test Article");
-    assert_eq!(metadata.home_display, true);
+    assert!(metadata.home_display);
     assert_eq!(metadata.category, Some("test".to_string()));
     assert_eq!(metadata.importance, 3);
     assert_eq!(metadata.tags, vec!["test"]);

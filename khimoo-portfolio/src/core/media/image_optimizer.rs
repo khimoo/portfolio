@@ -386,7 +386,7 @@ impl ImageOptimizer {
         // Extract author_image
         if let Some(author_image) = &metadata.author_image {
             // Convert from web path to file path
-            if let Some(filename) = author_image.split('/').last() {
+            if let Some(filename) = author_image.split('/').next_back() {
                 images.push(filename.to_string());
             }
         }
