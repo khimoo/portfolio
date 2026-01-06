@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Project configuration loader
-Centralizes all path configurations following DRY, ETC, and KISS principles
+Simple project configuration loader
+Follows DRY, ETC, and KISS principles
 """
 
 import os
@@ -11,11 +11,10 @@ from pathlib import Path
 try:
     import tomllib
 except ImportError:
-    # Python < 3.11 fallback
     try:
         import tomli as tomllib
     except ImportError:
-        print("Error: tomli package required for Python < 3.11. Install with: pip install tomli")
+        print("Error: tomli required for Python < 3.11. Install: pip install tomli")
         sys.exit(1)
 
 class ProjectConfig:
@@ -27,57 +26,56 @@ class ProjectConfig:
     def _load_config(self):
         """Load configuration from TOML file"""
         if not self.config_path.exists():
-            raise FileNotFoundError(f"Configuration file not found: {self.config_path}")
+            raise FileNotFoundError(f"Config not found: {self.config_path}")
         
         with open(self.config_path, "rb") as f:
             return tomllib.load(f)
     
-    def get_path(self, key):
-        """Get absolute path for a configuration key"""
-        relative_path = self._config["paths"][key]
-        return str(self.project_root / relative_path)
+    def get_path(self, key, relative=False):
+        """Get path for a configuration key"""
+        path = self._config["paths"][key]
+        return path if relative else str(self.project_root / path)
     
-    def get_relative_path(self, key):
-        """Get relative path for a configuration key"""
-        return self._config["paths"][key]
+    def get_config(self, section, key):
+        """Get configuration value from any section"""
+        return self._config[section][key]
     
-    def get_build_config(self, key):
-        """Get build configuration value"""
-        return self._config["build"][key]
-    
-    def get_optimization_config(self, key):
-        """Get optimization configuration value"""
-        return self._config["optimization"][key]
+    def get_public_url(self, mode=None):
+        """Get public URL based on mode"""
+        deployment = self._config["deployment"]
+        if mode == "github-pages" or os.getenv("GITHUB_PAGES_MODE") == "1":
+            return deployment["github_pages_path"]
+        return deployment["local_dev_path"]
 
-# Global configuration instance
+# Global config instance
 _config = None
 
 def get_config():
-    """Get the global configuration instance"""
     global _config
     if _config is None:
         _config = ProjectConfig()
     return _config
 
 if __name__ == "__main__":
-    # CLI interface for getting configuration values
     import argparse
     
-    parser = argparse.ArgumentParser(description="Get project configuration values")
-    parser.add_argument("key", help="Configuration key (e.g., articles_dir, assets_dir)")
-    parser.add_argument("--relative", action="store_true", help="Return relative path instead of absolute")
+    parser = argparse.ArgumentParser(description="Get project configuration")
+    parser.add_argument("key", help="Configuration key")
+    parser.add_argument("--relative", action="store_true", help="Return relative path")
+    parser.add_argument("--section", default="paths", help="Configuration section")
+    parser.add_argument("--mode", choices=["local", "github-pages"], help="Mode for public_url")
     
     args = parser.parse_args()
     
     try:
         config = get_config()
-        if args.relative:
-            print(config.get_relative_path(args.key))
+        
+        if args.key == "public_url":
+            print(config.get_public_url(args.mode))
+        elif args.section == "paths":
+            print(config.get_path(args.key, args.relative))
         else:
-            print(config.get_path(args.key))
-    except KeyError:
-        print(f"Error: Configuration key '{args.key}' not found", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
+            print(config.get_config(args.section, args.key))
+    except (KeyError, FileNotFoundError) as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)

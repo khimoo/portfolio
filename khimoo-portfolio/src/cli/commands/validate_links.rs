@@ -5,7 +5,6 @@ use walkdir::WalkDir;
 
 use crate::core::articles::processor::ArticleProcessor;
 use crate::core::articles::links::{LinkValidator, ProcessedArticleRef};
-use crate::core::articles::links::report_formatter::ValidationReportFormatter;
 use crate::config_loader::get_default_articles_dir;
 
 /// CLI arguments for the validate links command
@@ -16,14 +15,6 @@ pub struct ValidateLinksArgs {
     /// Directory containing markdown articles
     #[arg(short, long)]
     pub articles_dir: Option<PathBuf>,
-    
-    /// Output directory for validation reports
-    #[arg(short, long, default_value = "validation_reports")]
-    pub output_dir: PathBuf,
-    
-    /// Output format (json, text)
-    #[arg(short, long, default_value = "json")]
-    pub format: String,
     
     /// Enable verbose output
     #[arg(short, long)]
@@ -49,11 +40,7 @@ impl ValidateLinksCommand {
         
         if args.verbose {
             println!("Validating links in articles from: {}", articles_dir.display());
-            println!("Output directory: {}", args.output_dir.display());
         }
-        
-        // Create output directory if it doesn't exist
-        std::fs::create_dir_all(&args.output_dir)?;
         
         // Process articles and extract links
         let processed_articles = self.process_articles(&articles_dir, &args)?;
@@ -64,43 +51,43 @@ impl ValidateLinksCommand {
         // Validate links
         let validation_results = validator.validate_all()?;
         
-        // Format and save report based on requested format
-        match args.format.as_str() {
-            "json" => {
-                let report = ValidationReportFormatter::format_json(&validation_results)?;
-                let output_path = args.output_dir.join("validation-report.json");
-                std::fs::write(&output_path, report)?;
+        // Output to console
+        println!("🔍 Link Validation Report");
+        println!("📅 Generated: {}", chrono::Utc::now().to_rfc3339());
+        println!();
+        println!("📊 Summary:");
+        println!("   📚 Total articles: {}", validation_results.summary.total_articles);
+        println!("   🔗 Total links: {}", validation_results.summary.total_links);
+        
+        if validation_results.summary.broken_links > 0 {
+            println!("   ❌ Broken links: {}", validation_results.summary.broken_links);
+            println!();
+            println!("❌ Errors:");
+            for (i, error) in validation_results.errors.iter().enumerate() {
+                let error_type_str = match error.error_type {
+                    crate::core::articles::links::ValidationErrorType::BrokenLink => "🔗 Broken Link",
+                    crate::core::articles::links::ValidationErrorType::InvalidRelatedArticle => "📋 Invalid Related Article",
+                    crate::core::articles::links::ValidationErrorType::MissingMetadata => "📝 Missing Metadata",
+                    crate::core::articles::links::ValidationErrorType::InvalidMetadata => "❌ Invalid Metadata",
+                    crate::core::articles::links::ValidationErrorType::CircularReference => "🔄 Circular Reference",
+                    crate::core::articles::links::ValidationErrorType::OrphanedArticle => "🏝️  Orphaned Article",
+                };
                 
-                if args.verbose {
-                    println!("📄 JSON report written to: {}", output_path.display());
-                }
-            }
-            "text" | "console" => {
-                let report = ValidationReportFormatter::format_console(&validation_results);
-                let output_path = args.output_dir.join("validation-report.txt");
-                std::fs::write(&output_path, report)?;
+                let mut formatted = format!("{}. {}: {} → {}",
+                    i + 1,
+                    error_type_str,
+                    error.source_article,
+                    error.target_reference
+                );
                 
-                if args.verbose {
-                    println!("📄 Text report written to: {}", output_path.display());
+                if let Some(context) = &error.context {
+                    formatted.push_str(&format!(" ({})", context));
                 }
-            }
-            "markdown" | "md" => {
-                let report = ValidationReportFormatter::format_markdown(&validation_results);
-                let output_path = args.output_dir.join("validation-report.md");
-                std::fs::write(&output_path, report)?;
                 
-                if args.verbose {
-                    println!("📄 Markdown report written to: {}", output_path.display());
-                }
+                println!("{}", formatted);
             }
-            _ => {
-                // Default to writing all formats
-                ValidationReportFormatter::write_report_files(&validation_results, &args.output_dir)?;
-                
-                if args.verbose {
-                    println!("📄 All report formats written to: {}", args.output_dir.display());
-                }
-            }
+        } else {
+            println!("   ✅ All links valid");
         }
         
         if args.verbose {

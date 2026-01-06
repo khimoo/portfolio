@@ -71,34 +71,6 @@ impl ArticleProcessor {
         Ok(articles)
     }
 
-    /// Validate a processed article
-    pub fn validate_article(&self, article: &ProcessedArticleRef) -> Result<ValidationResult> {
-        let mut issues = Vec::new();
-        
-        // Validate metadata
-        if let Err(e) = self.metadata_extractor.validate_metadata(&article.metadata) {
-            issues.push(format!("Metadata validation failed: {}", e));
-        }
-        
-        // Check for empty content (basic validation)
-        if article.title.trim().is_empty() {
-            issues.push("Article has empty title".to_string());
-        }
-        
-        // Check for broken internal links (basic check - full validation requires all articles)
-        for link in &article.outbound_links {
-            if link.target_slug.is_empty() {
-                issues.push(format!("Empty link target: {}", link.original_text));
-            }
-        }
-        
-        Ok(ValidationResult {
-            article_slug: article.slug.clone(),
-            is_valid: issues.is_empty(),
-            issues,
-        })
-    }
-
     /// Generate slug from file path
     fn generate_slug_from_path(&self, file_path: &Path) -> String {
         file_path
@@ -123,14 +95,6 @@ impl Default for ArticleProcessor {
     fn default() -> Self {
         Self::new().expect("Failed to create default ArticleProcessor")
     }
-}
-
-/// Result of article validation
-#[derive(Debug, Clone)]
-pub struct ValidationResult {
-    pub article_slug: String,
-    pub is_valid: bool,
-    pub issues: Vec<String>,
 }
 
 /// Error types for article processing
@@ -171,27 +135,6 @@ This is a test article with [markdown link](other-article).
         assert_eq!(result.title, "Test Article");
         assert_eq!(result.metadata.importance, 4);
         assert_eq!(result.outbound_links.len(), 1);
-    }
-
-    #[test]
-    fn test_validate_article() {
-        let processor = ArticleProcessor::new().unwrap();
-        let content = r#"---
-title: "Valid Article"
-importance: 3
----
-
-# Valid Article
-
-Content here.
-"#;
-
-        let path = PathBuf::from("valid-article.md");
-        let article = processor.process_article(&path, content).unwrap();
-        let validation = processor.validate_article(&article).unwrap();
-        
-        assert!(validation.is_valid);
-        assert!(validation.issues.is_empty());
     }
 
     #[test]

@@ -33,15 +33,15 @@ impl AppConfig {
 
         // Check window location for production
         if let Some(window) = web_sys::window() {
-            if let Ok(pathname) = window.location().pathname() {
-                if pathname.starts_with("/portfolio-page/") || pathname.contains("/portfolio-page") {
-                    return "/portfolio-page".to_string();
-                }
-            }
-
             // Check hostname for GitHub Pages
             if let Ok(hostname) = window.location().hostname() {
                 if hostname.contains("github.io") {
+                    return "/portfolio-page".to_string();
+                }
+            }
+            
+            if let Ok(pathname) = window.location().pathname() {
+                if pathname.starts_with("/portfolio-page/") || pathname.contains("/portfolio-page") {
                     return "/portfolio-page".to_string();
                 }
             }

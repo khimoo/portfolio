@@ -8,7 +8,7 @@ pub mod media;
 
 // Re-export commonly used items from articles
 pub use articles::{
-    ArticleMetadata, MetadataExtractor, ArticleProcessor, ValidationResult, ProcessingError,
+    ArticleMetadata, MetadataExtractor, ArticleProcessor, ProcessingError,
     ExtractedLink, LinkType, LinkExtractor, LinkValidator, ValidationReport, ProcessedArticleRef
 };
 

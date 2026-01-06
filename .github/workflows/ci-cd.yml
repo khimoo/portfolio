@@ -6,16 +6,16 @@ on:
     paths:
       - 'khimoo-portfolio/**'
       - 'articles/**'
+      - 'content/**'
       - 'flake.nix'
       - 'flake.lock'
       - 'justfile'
+      - 'project.toml'
 
 env:
   CARGO_TERM_COLOR: always
-  NIX_CONFIG: "experimental-features = nix-command flakes"
   RUST_BACKTRACE: 1
   CARGO_INCREMENTAL: 0
-  NIXPKGS_ALLOW_UNFREE: 1
 
 jobs:
   build-and-deploy:
@@ -24,7 +24,6 @@ jobs:
       contents: write
       pages: write
       id-token: write
-      actions: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,8 +37,6 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            substituters = https://cache.nixos.org/ https://devenv.cachix.org
-            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=
 
       - name: Setup Nix cache
         uses: cachix/cachix-action@v14
@@ -48,32 +45,20 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
 
-      - name: Verify CI environment
-        run: nix develop --command just ci-verify-setup
+      - name: Setup CI environment
+        run: nix develop --command just ci-setup
 
-      - name: Optimize images
-        run: nix develop --command just ci-optimize-images
-
-      - name: Process articles
-        run: nix develop --command just ci-process-articles
-
-      - name: Build WebAssembly application
-        run: nix develop --command just ci-build-wasm
-
-      - name: Prepare deployment
-        run: nix develop --command just ci-prepare-deploy
+      - name: Build and prepare deployment
+        run: nix develop --command just ci-build
 
       - name: Verify build
-        run: nix develop --command just ci-verify
+        run: nix develop --command just verify
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: |
-            khimoo-portfolio/data/
-            khimoo-portfolio/dist/
-            public/
+          path: public/
           retention-days: 30
 
       - name: Deploy to GitHub Pages
@@ -84,4 +69,4 @@ jobs:
           publish_branch: gh-pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: 'Deploy to GitHub Pages from ${{ github.sha }}'
+          commit_message: 'Deploy from ${{ github.sha }}'

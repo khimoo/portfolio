@@ -44,8 +44,6 @@ mod tests {
         let command = ValidateLinksCommand::new().expect("Failed to create command");
         let args = ValidateLinksArgs {
             articles_dir: Some(PathBuf::from("../content/articles")),
-            output_dir: PathBuf::from("validation_reports"),
-            format: "json".to_string(),
             verbose: true,
         };
         

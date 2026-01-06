@@ -20,6 +20,14 @@ scripts_dir = "scripts"
 # Build configuration
 debounce_ms = 300
 parallel_processing = true
+wasm_target = "khimoo-portfolio"
+
+[deployment]
+# Deployment configuration
+github_pages_path = "/portfolio-page/"
+local_dev_path = "/"
+production_mode = "github-pages"  # "github-pages" or "custom"
+wasm_target = "khimoo-portfolio"
 
 [optimization]
 # Image optimization settings
