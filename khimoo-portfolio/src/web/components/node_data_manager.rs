@@ -3,6 +3,30 @@ use crate::web::data_loader::{ArticlesData, ProcessedArticle};
 use crate::web::types::*;
 use std::collections::HashMap;
 
+/// 簡単な疑似乱数生成器（線形合同法）
+struct SimpleRng {
+    seed: u32,
+}
+
+impl SimpleRng {
+    fn new(seed: u32) -> Self {
+        Self { seed }
+    }
+
+    fn next(&mut self) -> u32 {
+        self.seed = self.seed.wrapping_mul(1103515245).wrapping_add(12345);
+        self.seed
+    }
+
+    fn next_f32(&mut self) -> f32 {
+        (self.next() as f32) / (u32::MAX as f32)
+    }
+
+    fn next_range(&mut self, min: f32, max: f32) -> f32 {
+        min + self.next_f32() * (max - min)
+    }
+}
+
 /// データ処理を担当するモジュール
 pub struct NodeDataManager;
 
@@ -112,20 +136,22 @@ impl NodeDataManager {
             return (reg, id_to_slug);
         }
 
-        // 円形配置の計算
-        let radius = (container_bound.width.min(container_bound.height) * 0.3).max(150.0);
-        let angle_step = 2.0 * std::f32::consts::PI / home_articles.len() as f32;
+        // 疑似乱数生成器を初期化（記事数をシードに使用して再現性を保つ）
+        let mut rng = SimpleRng::new(home_articles.len() as u32 * 42);
+        let scatter_radius = 80.0; // 中心からの最大散らばり距離
 
+        // 円形配置の計算を削除し、疑似乱数で少しバラけさせて配置
         for (index, article) in home_articles.iter().enumerate() {
             let node_id = NodeId(next_id);
             let content = Self::determine_node_content(article);
 
-            // 作者記事の場合は中央に配置
+            // 疑似乱数で中心からの位置をずらす
             let (position, base_radius) = if article.metadata.author_image.is_some() {
                 #[cfg(target_arch = "wasm32")]
                 web_sys::console::log_1(
                     &format!("Placing author article '{}' at center", article.title).into(),
                 );
+                // 作者ノードは中心に配置
                 (
                     Position {
                         x: center_x,
@@ -134,10 +160,16 @@ impl NodeDataManager {
                     get_config().node_config.author_node_radius,
                 )
             } else {
-                let angle = index as f32 * angle_step;
-                let x = center_x + radius * angle.cos();
-                let y = center_y + radius * angle.sin();
-                (Position { x, y }, get_config().node_config.default_node_radius)
+                // 記事ノードは中心から少しずらして配置
+                let offset_x = rng.next_range(-scatter_radius, scatter_radius);
+                let offset_y = rng.next_range(-scatter_radius, scatter_radius);
+                (
+                    Position {
+                        x: center_x + offset_x,
+                        y: center_y + offset_y,
+                    },
+                    get_config().node_config.default_node_radius,
+                )
             };
 
             reg.add_node(node_id, position, base_radius, content);
