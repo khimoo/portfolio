@@ -143,6 +143,23 @@ impl NodeDataManager {
             reg.add_node(node_id, position, base_radius, content);
             reg.set_node_importance(node_id, article.metadata.importance);
             reg.set_node_inbound_count(node_id, article.inbound_links.len());
+            
+            // 重要度とインバウンドリンク数に基づいて動的にサイズを計算・更新
+            let dynamic_radius = reg.calculate_dynamic_radius(
+                node_id,
+                Some(article.metadata.importance),
+                article.inbound_links.len(),
+            );
+            reg.update_node_radius(node_id, dynamic_radius);
+
+            #[cfg(target_arch = "wasm32")]
+            web_sys::console::log_1(
+                &format!(
+                    "Node '{}': importance={}, inbound_links={}, base_radius={}, dynamic_radius={}",
+                    article.title, article.metadata.importance, article.inbound_links.len(), base_radius, dynamic_radius
+                )
+                .into(),
+            );
 
             slug_to_id.insert(article.slug.clone(), node_id);
             id_to_slug.insert(node_id, article.slug.clone());
