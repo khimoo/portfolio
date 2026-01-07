@@ -85,6 +85,9 @@ clippy:
 clean:
     @echo "🧹 Cleaning up..."
     @rm -rf {{APP_DIR}}/dist {{DATA_DIR}}/*.json {{APP_DIR}}/target {{APP_DIR}}/pkg public
+    @rm -rf scripts/__pycache__
+    @rm -rf ~/.cache/trunk
+    @echo "✅ Cleanup complete"
 
 # === CI/CD ===
 

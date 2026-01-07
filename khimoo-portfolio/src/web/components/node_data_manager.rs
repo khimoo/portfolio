@@ -104,7 +104,7 @@ impl NodeDataManager {
                     x: center_x,
                     y: center_y,
                 },
-                40,
+                get_config().node_config.default_node_radius,
                 NodeContent::Text("Author".to_string()),
             );
             slug_to_id.insert("author".to_string(), NodeId(next_id));
@@ -131,13 +131,13 @@ impl NodeDataManager {
                         x: center_x,
                         y: center_y,
                     },
-                    60,
+                    get_config().node_config.author_node_radius,
                 )
             } else {
                 let angle = index as f32 * angle_step;
                 let x = center_x + radius * angle.cos();
                 let y = center_y + radius * angle.sin();
-                (Position { x, y }, 30)
+                (Position { x, y }, get_config().node_config.default_node_radius)
             };
 
             reg.add_node(node_id, position, base_radius, content);
