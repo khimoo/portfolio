@@ -1,5 +1,5 @@
 ---
-title: provably-good-planar-mappings
+title: 連続体理論
 home_display: true
 importance: 2
 category: ""

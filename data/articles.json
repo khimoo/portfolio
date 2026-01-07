@@ -17,7 +17,7 @@
       "file_path": "../content/articles/pitch-bend.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.247952828+00:00"
+      "processed_at": "2026-01-07T03:56:18.551104371+00:00"
     },
     {
       "slug": "music",
@@ -36,7 +36,7 @@
       "file_path": "../content/articles/music.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.248111514+00:00"
+      "processed_at": "2026-01-07T03:56:18.551233643+00:00"
     },
     {
       "slug": "Neovim",
@@ -55,7 +55,7 @@
       "file_path": "../content/articles/Neovim.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.248227640+00:00"
+      "processed_at": "2026-01-07T03:56:18.551346475+00:00"
     },
     {
       "slug": "myworks",
@@ -135,7 +135,7 @@
         }
       ],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.249133928+00:00"
+      "processed_at": "2026-01-07T03:56:18.552275925+00:00"
     },
     {
       "slug": "mini_farm",
@@ -154,7 +154,7 @@
       "file_path": "../content/articles/mini_farm.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.249268128+00:00"
+      "processed_at": "2026-01-07T03:56:18.552408023+00:00"
     },
     {
       "slug": "Linux",
@@ -173,7 +173,7 @@
       "file_path": "../content/articles/Linux.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.249387581+00:00"
+      "processed_at": "2026-01-07T03:56:18.552545550+00:00"
     },
     {
       "slug": "template_article",
@@ -192,7 +192,7 @@
       "file_path": "../content/articles/Templates/template_article.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.249470635+00:00"
+      "processed_at": "2026-01-07T03:56:18.552627925+00:00"
     },
     {
       "slug": "drawing",
@@ -211,7 +211,7 @@
       "file_path": "../content/articles/drawing.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.249599295+00:00"
+      "processed_at": "2026-01-07T03:56:18.552754602+00:00"
     },
     {
       "slug": "gakuchika",
@@ -230,7 +230,7 @@
       "file_path": "../content/articles/gakuchika.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.249712837+00:00"
+      "processed_at": "2026-01-07T03:56:18.552870930+00:00"
     },
     {
       "slug": "myblog",
@@ -249,7 +249,7 @@
       "file_path": "../content/articles/myblog.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.249836307+00:00"
+      "processed_at": "2026-01-07T03:56:18.552991776+00:00"
     },
     {
       "slug": "about-khimoo",
@@ -335,7 +335,7 @@
         }
       ],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.250394867+00:00"
+      "processed_at": "2026-01-07T03:56:18.553555622+00:00"
     },
     {
       "slug": "math",
@@ -361,7 +361,7 @@
         }
       ],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.250573400+00:00"
+      "processed_at": "2026-01-07T03:56:18.553727814+00:00"
     },
     {
       "slug": "programming",
@@ -393,7 +393,7 @@
         }
       ],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.250763704+00:00"
+      "processed_at": "2026-01-07T03:56:18.553920575+00:00"
     },
     {
       "slug": "provably-good-planar-mappings",
@@ -412,13 +412,13 @@
       "file_path": "../content/articles/provably-good-planar-mappings.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.250866435+00:00"
+      "processed_at": "2026-01-07T03:56:18.554020673+00:00"
     },
     {
       "slug": "continuum_theory",
-      "title": "provably-good-planar-mappings",
+      "title": "連続体理論",
       "metadata": {
-        "title": "provably-good-planar-mappings",
+        "title": "連続体理論",
         "home_display": true,
         "category": "",
         "importance": 2,
@@ -431,7 +431,7 @@
       "file_path": "../content/articles/continuum_theory.md",
       "outbound_links": [],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.250952887+00:00"
+      "processed_at": "2026-01-07T03:56:18.554104951+00:00"
     },
     {
       "slug": "hobby",
@@ -487,10 +487,10 @@
         }
       ],
       "inbound_links": [],
-      "processed_at": "2026-01-06T17:36:48.251176272+00:00"
+      "processed_at": "2026-01-07T03:56:18.554307530+00:00"
     }
   ],
-  "generated_at": "2026-01-06T17:36:48.486351961+00:00",
+  "generated_at": "2026-01-07T03:56:18.789552669+00:00",
   "total_count": 16,
   "home_articles": [
     "pitch-bend",
