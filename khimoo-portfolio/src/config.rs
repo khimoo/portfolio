@@ -21,12 +21,12 @@ impl NodeConfig {
     /// Get default node configuration values
     pub fn new() -> Self {
         Self {
-            author_node_radius: 160,
-            default_node_radius: 30,
+            author_node_radius: 120,
+            default_node_radius: 50,
             min_node_radius: 20,
-            max_node_radius: 80,
-            importance_multiplier: 8,
-            inbound_link_multiplier: 4,
+            max_node_radius: 120,
+            importance_multiplier: 10,
+            inbound_link_multiplier: 20,
             default_importance: 3,
         }
     }

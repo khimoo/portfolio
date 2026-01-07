@@ -175,10 +175,10 @@ impl NodeRegistry {
         importance: Option<u8>,
         inbound_count: usize,
     ) -> i32 {
-        let base_size = if self.is_author_node(node_id) { 
-            self.node_config.author_node_radius 
-        } else { 
-            self.node_config.default_node_radius 
+        let base_size = if self.is_author_node(node_id) {
+            self.node_config.author_node_radius
+        } else {
+            self.node_config.default_node_radius
         };
 
         if self.is_author_node(node_id) {
@@ -188,10 +188,11 @@ impl NodeRegistry {
         let importance_multiplier = importance.unwrap_or(self.node_config.default_importance) as i32;
         let importance_bonus = (importance_multiplier - self.node_config.default_importance as i32) * self.node_config.importance_multiplier;
 
-        let inbound_multiplier = (inbound_count as f32).sqrt() as i32;
-        let inbound_bonus = inbound_multiplier * self.node_config.inbound_link_multiplier;
+        // let inbound_multiplier = (inbound_count as f32).sqrt() as i32;
+        // let inbound_bonus = inbound_multiplier * self.node_config.inbound_link_multiplier;
 
-        let calculated_size = base_size + importance_bonus + inbound_bonus;
+        // let calculated_size = base_size + importance_bonus + inbound_bonus;
+        let calculated_size = base_size + importance_bonus;
         calculated_size.clamp(self.node_config.min_node_radius, self.node_config.max_node_radius)
     }
 
